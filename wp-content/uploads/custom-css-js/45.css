@@ -1,0 +1,12 @@
+<!-- start Simple Custom CSS and JS -->
+<style type="text/css">
+/* List Item */
+#main .products li{
+	color:white !important;
+	background-color: grey;
+	
+}
+
+
+</style>
+<!-- end Simple Custom CSS and JS -->
