@@ -294,6 +294,46 @@ jQuery(document).ready( function($) {
 		}
 	});
 	
+	// WCfM Marketplace Delivery Time Settings Update
+	$('#wcfm_delivery_time_setting_save_button').click(function(event) {
+	  event.preventDefault();
+	  
+	  // Validations
+		$('.wcfm-message').html('').removeClass('wcfm-error').removeClass('wcfm-success').slideUp();
+		$wcfm_is_valid_form = true;
+		$( document.body ).trigger( 'wcfm_form_validate', $('#wcfm_vendor_manage_delivery_time_setting_form') );
+		$is_valid = $wcfm_is_valid_form;
+	  
+	  if($is_valid) {
+			$('#wcfm_vendor_manage_delivery_time_setting_form').block({
+				message: null,
+				overlayCSS: {
+					background: '#fff',
+					opacity: 0.6
+				}
+			});
+			var data = {
+				action                    : 'wcfm_ajax_controller',
+				controller                : 'wcfm-vendors-manage-marketplace-settings',
+				wcfm_settings_form        : $('#wcfm_vendor_manage_delivery_time_setting_form').serialize()
+			}	
+			$.post(wcfm_params.ajax_url, data, function(response) {
+				if(response) {
+					$response_json = $.parseJSON(response);
+					$('.wcfm-message').html('').removeClass('wcfm-error').removeClass('wcfm-success').slideUp();
+					if($response_json.status) {
+						wcfm_notification_sound.play();
+						$('#wcfm_settings_form_delivery_time_expander .wcfm-message').html('<span class="wcicon-status-completed"></span>' + $response_json.message).addClass('wcfm-success').slideDown();
+					} else {
+						wcfm_notification_sound.play();
+						$('#wcfm_settings_form_delivery_time_expander .wcfm-message').html('<span class="wcicon-status-cancelled"></span>' + $response_json.message).addClass('wcfm-error').slideDown();
+					}
+					$('#wcfm_vendor_manage_delivery_time_setting_form').unblock();
+				}
+			});	
+		}
+	});
+	
 	// WCfM Marketplace Store Invoice Settings Update
 	$('#wcfm_store_invoice_setting_save_button').click(function(event) {
 	  event.preventDefault();

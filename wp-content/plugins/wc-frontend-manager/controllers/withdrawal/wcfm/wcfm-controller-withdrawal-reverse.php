@@ -137,6 +137,9 @@ class WCFM_Withdrawal_Reverse_Controller {
 				// Balance
 				$wcfm_reverse_withdrawal_requests_json_arr[$index][] = wc_price( $wcfm_reverse_withdrawal_request_single->balance );
 				
+				// Additional Info
+				$wcfm_reverse_withdrawal_requests_json_arr[$index][] = apply_filters( 'wcfm_withdrawal_reverse_additonal_data', '&ndash;', $wcfm_reverse_withdrawal_request_single->ID, $wcfm_reverse_withdrawal_request_single->order_id, $wcfm_reverse_withdrawal_request_single->vendor_id );
+				
 				// Note
 				if( $wcfm_reverse_withdrawal_request_single->withdraw_note ) {
 					$wcfm_reverse_withdrawal_requests_json_arr[$index][] = $wcfm_reverse_withdrawal_request_single->withdraw_note;

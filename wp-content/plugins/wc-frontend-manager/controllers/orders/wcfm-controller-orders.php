@@ -251,7 +251,7 @@ class WCFM_Orders_Controller {
 						$shipping_address = wp_kses( $the_order->get_formatted_shipping_address(), array( 'br' => array() ) );
 					}
 				}
-				$wcfm_orders_json_arr[$index][] = "<div style='text-align:left;'>" . apply_filters( 'wcfm_orderlist_shipping_address',$shipping_address, $wcfm_orders_single->ID ) . "</div>";
+				$wcfm_orders_json_arr[$index][] = "<div style='text-align:left;'>" . apply_filters( 'wcfm_orderlist_shipping_address', $shipping_address, $wcfm_orders_single->ID ) . "</div>";
 				
 				// Gross Sales
 				$gross_sales  = (float) $the_order->get_total();

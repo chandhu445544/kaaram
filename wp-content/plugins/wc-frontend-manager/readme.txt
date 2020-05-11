@@ -5,9 +5,9 @@ Donate link: https://www.paypal.me/wclovers/25usd
 Requires at least: 4.4
 Tested up to: 5.4
 WC requires at least: 3.0
-WC tested up to: 4.0.0
+WC tested up to: 4.1.0
 Requires PHP: 5.6
-Stable tag: 6.4.8
+Stable tag: 6.4.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -220,6 +220,18 @@ Fully compatible with all major multi-vendor marketplace plugins - <strong>WCFM 
 25. WCFM Dashboard - Mobile view
 
 == Changelog ==
+
+= 6.4.9 =
+*Updated - 08/05/2020*
+
+* Enhance - WooCommerce 4.1 compatibility added
+* Enhance - Delivery Time module compatibility added - [WCFM Delivery addon required](https://wclovers.com/product/woocommerce-frontend-manager-delivery/) - [Documentation](https://docs.wclovers.com/delivery-time/)
+* Enhance - WooCommerce Bookings "Global Availability" vendor wise compatibility added (WCFM Ultimate required)
+* Enhance - Dashboard fields display improved
+* Enhance - Dashboard menu RTL responsive display improved
+* Enhance - German Market "Age Restrction" module support added
+* Enhance - German Market product manage fields not visible for "Variable" product issue resolved
+* Fixed   - Germanized for WooCommerce "Delivery Time" field edit issue resolved
 
 = 6.4.8 =
 *Updated - 17/04/2020*
@@ -2358,10 +2370,12 @@ Fully compatible with all major multi-vendor marketplace plugins - <strong>WCFM 
 
 == Upgrade Notice ==
 
-= 6.4.8 =
-* Feature - YiTH Request a Quote Premium compatibility added (WCFM Ultimate Required)
-* Enhance - WooCommerce German Market product fields compatibility added
-* Enhance - Pending approval product "Reject with Reason" option added
-* Enhance - WooCommerce Simple Auction Relist and Auction Fail vendor email added
-* Enhance - Membership module option added - Manager from WCFM Admin Setting -> Modules
-* Fixed   - Reverse withdrawal screen "select2" library missing issue resolved 
+= 6.4.9 =
+* Enhance - WooCommerce 4.1 compatibility added
+* Enhance - Delivery Time module compatibility added - [WCFM Delivery addon required](https://wclovers.com/product/woocommerce-frontend-manager-delivery/) - [Documentation](https://docs.wclovers.com/delivery-time/)
+* Enhance - WooCommerce Bookings "Global Availability" vendor wise compatibility added (WCFM Ultimate required)
+* Enhance - Dashboard fields display improved
+* Enhance - Dashboard menu RTL responsive display improved
+* Enhance - German Market "Age Restrction" module support added
+* Enhance - German Market product manage fields not visible for "Variable" product issue resolved
+* Fixed   - Germanized for WooCommerce "Delivery Time" field edit issue resolved

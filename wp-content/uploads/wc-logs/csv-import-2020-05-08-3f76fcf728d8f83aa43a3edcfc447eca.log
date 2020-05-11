@@ -1,0 +1,63 @@
+2020-05-08T19:56:40+00:00 DEBUG ---[ New Import ] PHP Memory: 512 MB, WP Memory: 40 MB
+2020-05-08T19:56:40+00:00 DEBUG Parsing products CSV.
+2020-05-08T19:56:40+00:00 DEBUG Finished parsing products CSV.
+2020-05-08T19:56:40+00:00 DEBUG ---
+2020-05-08T19:56:40+00:00 DEBUG Processing products.
+2020-05-08T19:56:40+00:00 DEBUG > Row 1 - preparing for import.
+2020-05-08T19:56:40+00:00 DEBUG > Inserting 
+2020-05-08T19:56:40+00:00 DEBUG Failed to import product &#8220;&#8221;
+2020-05-08T19:56:40+00:00 DEBUG > Row 2 - preparing for import.
+2020-05-08T19:56:40+00:00 DEBUG > Inserting 
+2020-05-08T19:56:40+00:00 DEBUG Failed to import product &#8220;&#8221;
+2020-05-08T19:56:40+00:00 DEBUG > Row 3 - preparing for import.
+2020-05-08T19:56:40+00:00 DEBUG > Inserting 
+2020-05-08T19:56:40+00:00 DEBUG Failed to import product &#8220;&#8221;
+2020-05-08T19:56:40+00:00 DEBUG > Row 4 - preparing for import.
+2020-05-08T19:56:40+00:00 DEBUG > Inserting 
+2020-05-08T19:56:40+00:00 DEBUG Failed to import product &#8220;&#8221;
+2020-05-08T19:56:40+00:00 DEBUG > Row 5 - preparing for import.
+2020-05-08T19:56:40+00:00 DEBUG > Inserting 
+2020-05-08T19:56:40+00:00 DEBUG Failed to import product &#8220;&#8221;
+2020-05-08T19:56:40+00:00 DEBUG > Row 6 - preparing for import.
+2020-05-08T19:56:40+00:00 DEBUG > Inserting 
+2020-05-08T19:56:40+00:00 DEBUG Failed to import product &#8220;&#8221;
+2020-05-08T19:56:40+00:00 DEBUG > Row 7 - preparing for import.
+2020-05-08T19:56:40+00:00 DEBUG > Inserting 
+2020-05-08T19:56:40+00:00 DEBUG Failed to import product &#8220;&#8221;
+2020-05-08T19:56:40+00:00 DEBUG > Row 8 - preparing for import.
+2020-05-08T19:56:40+00:00 DEBUG > Inserting 
+2020-05-08T19:56:40+00:00 DEBUG Failed to import product &#8220;&#8221;
+2020-05-08T19:56:40+00:00 DEBUG > Row 9 - preparing for import.
+2020-05-08T19:56:40+00:00 DEBUG > Inserting 
+2020-05-08T19:56:40+00:00 DEBUG Failed to import product &#8220;&#8221;
+2020-05-08T19:56:40+00:00 DEBUG Finished processing products.
+2020-05-08T19:56:40+00:00 DEBUG ---[ New Import ] PHP Memory: 512 MB, WP Memory: 40 MB
+2020-05-08T19:56:40+00:00 DEBUG Parsing products CSV.
+2020-05-08T19:56:40+00:00 DEBUG Finished parsing products CSV.
+2020-05-08T19:56:40+00:00 DEBUG ---
+2020-05-08T19:56:40+00:00 DEBUG Processing products.
+2020-05-08T19:56:40+00:00 DEBUG > Row 1 - preparing for import.
+2020-05-08T19:56:40+00:00 DEBUG > Inserting 
+2020-05-08T19:56:40+00:00 DEBUG Failed to import product &#8220;&#8221;
+2020-05-08T19:56:40+00:00 DEBUG > Row 2 - preparing for import.
+2020-05-08T19:56:40+00:00 DEBUG > Inserting 
+2020-05-08T19:56:40+00:00 DEBUG Failed to import product &#8220;&#8221;
+2020-05-08T19:56:40+00:00 DEBUG > Row 3 - preparing for import.
+2020-05-08T19:56:40+00:00 DEBUG > Inserting 
+2020-05-08T19:56:40+00:00 DEBUG Failed to import product &#8220;&#8221;
+2020-05-08T19:56:40+00:00 DEBUG > Row 4 - preparing for import.
+2020-05-08T19:56:40+00:00 DEBUG > Inserting 
+2020-05-08T19:56:40+00:00 DEBUG Failed to import product &#8220;&#8221;
+2020-05-08T19:56:40+00:00 DEBUG > Row 5 - preparing for import.
+2020-05-08T19:56:40+00:00 DEBUG > Inserting 
+2020-05-08T19:56:40+00:00 DEBUG Failed to import product &#8220;&#8221;
+2020-05-08T19:56:40+00:00 DEBUG > Row 6 - preparing for import.
+2020-05-08T19:56:40+00:00 DEBUG > Inserting 
+2020-05-08T19:56:40+00:00 DEBUG Failed to import product &#8220;&#8221;
+2020-05-08T19:56:40+00:00 DEBUG > Row 7 - preparing for import.
+2020-05-08T19:56:40+00:00 DEBUG > Inserting 
+2020-05-08T19:56:40+00:00 DEBUG Failed to import product &#8220;&#8221;
+2020-05-08T19:56:40+00:00 DEBUG > Row 8 - preparing for import.
+2020-05-08T19:56:40+00:00 DEBUG > Inserting 
+2020-05-08T19:56:40+00:00 DEBUG Failed to import product &#8220;&#8221;
+2020-05-08T19:56:40+00:00 DEBUG Finished processing products.

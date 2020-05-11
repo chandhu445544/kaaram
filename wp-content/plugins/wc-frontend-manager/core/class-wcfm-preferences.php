@@ -70,6 +70,7 @@ class WCFM_Preferences {
 		
 		// Delivery
 		add_filter( 'wcfm_is_pref_delivery', array( &$this, 'wcfmpref_delivery' ), 750 );
+		add_filter( 'wcfm_is_pref_delivery_time', array( &$this, 'wcfmpref_delivery_time' ), 750 );
 		
 		// Affiliate
 		add_filter( 'wcfm_is_pref_affiliate', array( &$this, 'wcfmpref_affiliate' ), 750 );
@@ -299,6 +300,13 @@ class WCFM_Preferences {
   function wcfmpref_delivery( $is_pref ) {
   	$delivery = ( isset( $this->wcfm_module_options['delivery'] ) ) ? $this->wcfm_module_options['delivery'] : 'no';
   	if( $delivery == 'yes' ) $is_pref = false;
+  	return $is_pref;
+  }
+  
+  // Delivery Time
+  function wcfmpref_delivery_time( $is_pref ) {
+  	$delivery_time = ( isset( $this->wcfm_module_options['delivery_time'] ) ) ? $this->wcfm_module_options['delivery_time'] : 'no';
+  	if( $delivery_time == 'yes' ) $is_pref = false;
   	return $is_pref;
   }
   

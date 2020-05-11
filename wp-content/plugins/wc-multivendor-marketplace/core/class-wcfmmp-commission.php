@@ -51,6 +51,9 @@ class WCFMmp_Commission {
 		add_filter('wcfmmmp_shipping_commission_rule', array(&$this, 'wcfmmp_shipping_tax_commission_rule_fixed_handler' ) );
 		add_filter('wcfmmmp_tax_commission_rule', array(&$this, 'wcfmmp_shipping_tax_commission_rule_fixed_handler' ) );
 		
+		// Commission on Tax Admin MOde Handler
+		add_filter( 'wcfmmp_commission_deducted_tax', array(&$this, 'wcfmmp_commission_deducted_tax_admin_mode_handler' ), 100, 6 );
+		
 		// On Order Item Refund
 		add_action( 'woocommerce_order_refunded', array(&$this, 'wcfmmp_commission_order_item_refund' ), 30, 2 );
 		
@@ -905,6 +908,49 @@ class WCFMmp_Commission {
 		global $WCFM, $WCFMmp, $wpdb;
 		if( isset( $commission_rule['fixed'] ) ) $commission_rule['fixed'] = 0;
 		return $commission_rule;
+	}
+	
+	/**
+	 * Tax on Commission Admin Mode Handler
+	 */
+	function wcfmmp_commission_deducted_tax_admin_mode_handler( $commission_tax, $vendor_id, $product_id, $order_id, $total_commission, $commission_rule ) {
+		global $WCFM, $WCFMmp, $wpdb;
+		
+		if( apply_filters( 'wcfm_is_admin_fee_mode', false ) ) {
+			if( isset( $commission_rule['tax_enable'] ) && ( $commission_rule['tax_enable'] == 'yes' ) ) {
+				$order = wc_get_order( $order_id );
+				$vendor_wise_gross_sales = 0;
+				
+				$items = $order->get_items('line_item');
+				foreach ($items as $order_item_id => $item) {
+					$line_item = new WC_Order_Item_Product($item);
+					$pproduct_id = $line_item->get_product_id();
+					if ($pproduct_id && ( $product_id == $pproduct_id )) {
+						$pvendor_id = wcfm_get_vendor_id_by_post( $product_id );
+						if( $pvendor_id && ( $pvendor_id == $vendor_id ) ) {
+							$line_item_total = $line_item->get_total() + $line_item->get_total_tax();
+		
+							$vendor_wise_gross_sales += $line_item_total;
+						}
+					}
+				}
+				
+				$shipping_items = $order->get_items('shipping');
+				foreach ($shipping_items as $shipping_item_id => $shipping_item) {
+					$order_item_shipping = new WC_Order_Item_Shipping($shipping_item_id);
+					$shipping_vendor_id = $order_item_shipping->get_meta('vendor_id', true);
+					if( ( $shipping_vendor_id > 0 ) && ( $shipping_vendor_id == $vendor_id ) ) {
+						$shipping_item_total = $order_item_shipping->get_total() + $order_item_shipping->get_total_tax();
+						
+						$vendor_wise_gross_sales += $shipping_item_total;
+					}
+				}
+				
+				$admin_fee = (float) $vendor_wise_gross_sales - (float) $total_commission;
+				$commission_tax = $admin_fee * ( (float)$commission_rule['tax_percent'] / 100 );
+			}
+		}
+		return $commission_tax;
 	}
 	
 	/**

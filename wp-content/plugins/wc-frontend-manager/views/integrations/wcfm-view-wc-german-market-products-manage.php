@@ -17,6 +17,7 @@ $min_qty = 1;
 $_unit_regular_price_per_unit = '';
 $_auto_ppu_complete_product_quantity = '';
 $_unit_regular_price_per_unit_mult = '';
+$_age_rating_age = '';
 
 if( isset( $wp->query_vars['wcfm-products-manage'] ) && !empty( $wp->query_vars['wcfm-products-manage'] ) ) {
 	$product_id = absint( $wp->query_vars['wcfm-products-manage'] );
@@ -26,6 +27,10 @@ if( isset( $wp->query_vars['wcfm-products-manage'] ) && !empty( $wp->query_vars[
 		$_unit_regular_price_per_unit = get_post_meta( $product_id, '_unit_regular_price_per_unit', true );
 		$_auto_ppu_complete_product_quantity = get_post_meta( $product_id, '_auto_ppu_complete_product_quantity', true );
 		$_unit_regular_price_per_unit_mult = get_post_meta( $product_id, '_unit_regular_price_per_unit_mult', true );
+		
+		if ( get_option( 'german_market_age_rating', 'off' ) == 'on' ) {
+			$_age_rating_age = get_post_meta( $product_id, '_age_rating_age', true );
+		}
 	}
 }
 
@@ -47,7 +52,7 @@ if ( is_array( $terms ) && ! empty( $terms ) ) {
 }
 
 ?>
-<div class="page_collapsible products_manage_wc_german_market simple" id="wcfm_products_manage_form_wc_german_markethead"><label class="wcfmfa fa-dollar-sign"></label><?php _e( 'Price per Unit', 'woocommerce-german-market' ); ?><span></span></div>
+<div class="page_collapsible products_manage_wc_german_market simple variable" id="wcfm_products_manage_form_wc_german_markethead"><label class="wcfmfa fa-dollar-sign"></label><?php _e( 'Price per Unit', 'woocommerce-german-market' ); ?><span></span></div>
 <div class="wcfm-container simple variable">
 	<div id="wcfm_products_manage_form_wc_german_market_expander" class="wcfm-content">
 		<?php
@@ -62,3 +67,19 @@ if ( is_array( $terms ) && ! empty( $terms ) ) {
 		<div class="wcfm-clearfix"></div><br />
 	</div>
 </div>
+
+<?php if ( get_option( 'german_market_age_rating', 'off' ) == 'on' ) { ?>
+	<div class="page_collapsible products_manage_wc_german_market simple variable" id="wcfm_products_manage_form_wc_german_market_age_restriction_head"><label class="wcfmfa fa-address-card"></label><?php _e( 'Age Rating', 'woocommerce-german-market' ); ?><span></span></div>
+	<div class="wcfm-container simple variable">
+		<div id="wcfm_products_manage_form_wc_german_market_age_restriction_expander" class="wcfm-content">
+			<?php
+			 $wcfm_wc_german_market_fields = apply_filters( 'wcfm_wc_german_market_age_restriction_fields', array(  
+					"_age_rating_age" => array('label' => __( 'Required age to buy this product', 'woocommerce-german-market' ) . ' ('.__( 'Years', 'woocommerce-german-market' ).')' , 'type' => 'number', 'class' => 'wcfm-text wcfm_ele simple variable wcfm_non_negative_input', 'label_class' => 'wcfm_title simple variable', 'value' => $_age_rating_age ),
+																														), $product_id );
+			 
+			 $WCFM->wcfm_fields->wcfm_generate_form_field(	$wcfm_wc_german_market_fields );																								
+			?>
+			<div class="wcfm-clearfix"></div><br />
+		</div>
+	</div>
+<?php } ?>

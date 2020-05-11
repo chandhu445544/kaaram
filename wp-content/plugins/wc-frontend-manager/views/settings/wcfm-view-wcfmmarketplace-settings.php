@@ -310,7 +310,7 @@ $is_marketplace = wcfm_is_marketplace();
 							<div class="wcfm_clearfix"></div>
 							<div class="store_address">		
 								<?php
-								$settings_fields_general = apply_filters( 'wcfm_marketplace_settings_fields_general', array(
+								$settings_fields_general = apply_filters( 'wcfm_marketplace_settings_fields_brand', array(
 																																																	"gravatar" => array('label' => __('Store Logo', 'wc-frontend-manager') , 'type' => 'upload', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title', 'prwidth' => 150, 'value' => $gravatar_url, 'hints' => __( 'Preferred  size is (125x125) pixels.', 'wc-frontend-manager' ) ),
 																																																	
 																																																	"banner_type" => array('label' => __('Store Banner Type', 'wc-frontend-manager') , 'type' => 'select', 'options' => $store_banner_types, 'class' => 'wcfm-select wcfm_ele wcfm-banner-uploads', 'label_class' => 'wcfm_title', 'value' => $banner_type ),
@@ -376,11 +376,11 @@ $is_marketplace = wcfm_is_marketplace();
 											
 								$WCFM->wcfm_fields->wcfm_generate_form_field( $settings_fields_general );	
 								?>
+								<div class="wcfm_clearfix"></div><br />
 							</div>
 						<?php } ?>
 						
 						<?php if( apply_filters( 'wcfm_is_allow_store_visibility', true ) ) { ?>
-							<div class="wcfm_clearfix"></div><br />
 							<div class="wcfm_vendor_settings_heading"><h2><?php _e( 'Store Visibility Setup', 'wc-frontend-manager' ); ?></h2></div>
 							<div class="wcfm_clearfix"></div>
 							<div class="store_address store_visibility_wrap">
@@ -418,6 +418,7 @@ $is_marketplace = wcfm_is_marketplace();
 								
 								$WCFM->wcfm_fields->wcfm_generate_form_field( $settings_fields_visibility );
 								?>
+								<div class="wcfm_clearfix"></div><br />
 							</div>
 						<?php } ?>
 					</div>

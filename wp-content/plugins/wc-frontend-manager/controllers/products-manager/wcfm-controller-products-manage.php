@@ -614,6 +614,11 @@ class WCFM_Products_Manage_Controller {
 				
 				do_action( 'after_wcfm_products_manage_meta_save', $new_product_id, $wcfm_products_manage_form_data );
 				
+				// Clear cache and transients
+				wc_delete_product_transients( $new_product_id );
+				//wp_cache_delete( 'product-' . $new_product_id, 'products' );
+				//wp_cache_delete( $new_product_id, 'post_meta' );
+				
 				// Notify Admin on New Product Creation
 				if( $is_publish ) {
 					// Have to test before adding action
@@ -655,7 +660,11 @@ class WCFM_Products_Manage_Controller {
                 if( defined('WCFM_REST_API_CALL') ) {
                   return '{"status": true, "message": "' . apply_filters( 'product_pending_message', $wcfm_products_manage_messages['product_pending'], $new_product_id ) . '", "redirect": "' . apply_filters( 'wcfm_product_save_pending_redirect', get_wcfm_edit_product_url( $new_product_id ), $new_product_id ) . '", "id": "' . $new_product_id . '", "title": "' . get_the_title( $new_product_id ) . '"}';
                 } else {
-                  echo '{"status": true, "message": "' . apply_filters( 'product_saved_message', $wcfm_products_manage_messages['product_saved'], $new_product_id ) . '", "redirect": "' . apply_filters( 'wcfm_product_save_draft_redirect', get_wcfm_edit_product_url( $new_product_id ), $new_product_id ) . '", "id": "' . $new_product_id . '"}';
+                	if( isset( $_POST['variation_auto_generate'] ) && $_POST['variation_auto_generate'] ) {
+                		echo '{"status": true, "message": "' . apply_filters( 'product_saved_message', $wcfm_products_manage_messages['product_saved'], $new_product_id ) . '", "redirect": "' . apply_filters( 'wcfm_product_save_draft_redirect', get_wcfm_edit_product_url( $new_product_id ).'#wcfm_products_manage_form_variations_head', $new_product_id ) . '", "id": "' . $new_product_id . '"}';
+                	} else {
+                		echo '{"status": true, "message": "' . apply_filters( 'product_saved_message', $wcfm_products_manage_messages['product_saved'], $new_product_id ) . '", "redirect": "' . apply_filters( 'wcfm_product_save_draft_redirect', get_wcfm_edit_product_url( $new_product_id ), $new_product_id ) . '", "id": "' . $new_product_id . '"}';
+                	}
                 }
               }
 						}

@@ -194,7 +194,7 @@ class WCFM_Frontend {
 					wp_safe_redirect( apply_filters( 'wcfm_change_membership_url', get_wcfm_membership_url() ) );
 					exit;
 				} else {
-					wp_safe_redirect( get_permalink( wc_get_page_id( 'myaccount' ) ) );
+					wp_safe_redirect( apply_filters( 'wcfm_restrict_redirect_url', get_permalink( wc_get_page_id( 'myaccount' ) ) ) );
 					exit;
 				}
 			}
@@ -899,21 +899,21 @@ class WCFM_Frontend {
  		if( isset( $_REQUEST['fl_builder'] ) ) return;
  		
  		// Libs
-	  $WCFM->library->load_qtip_lib();
+	  //$WCFM->library->load_qtip_lib();
 	  
 	  // Block UI
-	  if( apply_filters( 'wcfm_is_allow_blockui', true ) ) {
+	  if( apply_filters( 'wcfm_is_allow_blockui', false ) ) {
 	  	$WCFM->library->load_blockui_lib();
 	  }
 	  
 	  // Colorbox
-	  $WCFM->library->load_colorbox_lib();
+	  //$WCFM->library->load_colorbox_lib();
 	  
 	  // Date Picker
 	  $WCFM->library->load_datepicker_lib();
  		
  		// Core JS
-	  wp_enqueue_script( 'wcfm_core_js', $WCFM->library->js_lib_url_min . 'wcfm-script-core.js', array('jquery', 'wcfm_qtip_js' ), $WCFM->version, true );
+	  wp_enqueue_script( 'wcfm_core_js', $WCFM->library->js_lib_url_min . 'wcfm-script-core.js', array( 'jquery' ), $WCFM->version, true );
 	  
 	  // Localized Script
 	  if( apply_filters( 'wcfm_is_allow_sound', true ) ) {
@@ -922,7 +922,7 @@ class WCFM_Frontend {
 			} else {
 				//wp_localize_script( 'wcfm_core_js', 'wcfm_notification_sound', $WCFM->library->lib_url . 'sounds/empty_audio.mp3' );
 			}
-			if( apply_filters( 'wcfm_is_allow_desktop_notification_sound', true ) ) {
+			if( apply_filters( 'wcfm_is_allow_new_message_check', false ) && apply_filters( 'wcfm_is_allow_desktop_notification', true ) && apply_filters( 'wcfm_is_allow_desktop_notification_sound', true ) ) {
 				wp_localize_script( 'wcfm_core_js', 'wcfm_desktop_notification_sound', apply_filters( 'wcfm_desktop_notification_sound', $WCFM->library->lib_url . 'sounds/desktop_notification.mp3' ) );
 			} else {
 				//wp_localize_script( 'wcfm_core_js', 'wcfm_desktop_notification_sound', $WCFM->library->lib_url . 'sounds/empty_audio.mp3' );
@@ -934,8 +934,12 @@ class WCFM_Frontend {
 		$wcfm_dashboard_messages = get_wcfm_dashboard_messages();
 		wp_localize_script( 'wcfm_core_js', 'wcfm_core_dashboard_messages', $wcfm_dashboard_messages );
 	  
-	  $unread_message = $WCFM->wcfm_notification->wcfm_direct_message_count( 'message' );
-		$unread_enquiry = $WCFM->wcfm_notification->wcfm_direct_message_count( 'enquiry' );
+		$unread_message = 0;
+		$unread_enquiry = 0;
+		if( apply_filters( 'wcfm_is_allow_new_message_check', false ) ) {
+			$unread_message = $WCFM->wcfm_notification->wcfm_direct_message_count( 'message' );
+			$unread_enquiry = $WCFM->wcfm_notification->wcfm_direct_message_count( 'enquiry' );
+		}
 		
 		$ajax_url = WC()->ajax_url();
 		if ( defined( 'ICL_SITEPRESS_VERSION' ) && ! ICL_PLUGIN_INACTIVE && class_exists( 'SitePress' ) ) {
@@ -964,6 +968,15 @@ class WCFM_Frontend {
 	  	                                                        'is_mobile'                                => wcfm_is_mobile(),
 	  	                                                        'is_tablet'                                => wcfm_is_tablet()
 	  	                                                       ) );
+	  
+	  // Inquery Localized Script
+		$wcfm_inquiry_messages = get_wcfm_enquiry_manage_messages();
+		wp_localize_script( 'wcfm_core_js', 'wcfm_enquiry_manage_messages', $wcfm_inquiry_messages );
+		
+		// WCFM Ultimate Localize Script
+	  $wcfm_core_messages = get_wcfm_products_manager_messages();
+		wp_localize_script( 'wcfm_core_js', 'wcfmu_products_manage_messages', $wcfm_core_messages );
+	  
 	  
 	  // Load End Point Scripts
 	  if( is_wcfm_page() ) {
@@ -1013,7 +1026,7 @@ class WCFM_Frontend {
  		if( isset( $_REQUEST['fl_builder'] ) ) return;
  		
  		// WC Icon set
-	  wp_enqueue_style( 'wcfm_wc_icon_css',  $WCFM->library->css_lib_url_min . 'wcfm-style-icon.css', array(), $WCFM->version );
+	  //wp_enqueue_style( 'wcfm_wc_icon_css',  $WCFM->library->css_lib_url_min . 'wcfm-style-icon.css', array(), $WCFM->version );
 	  
 	  // Font Awasome Icon set
 	  if( apply_filters( 'wcfm_is_allow_font_awesome', true ) ) {
@@ -1028,7 +1041,7 @@ class WCFM_Frontend {
 		}
 	  
 	  // Admin Bar CSS
-	  wp_enqueue_style( 'wcfm_admin_bar_css',  $WCFM->library->css_lib_url_min . 'wcfm-style-adminbar.css', array(), $WCFM->version );
+	  //wp_enqueue_style( 'wcfm_admin_bar_css',  $WCFM->library->css_lib_url_min . 'wcfm-style-adminbar.css', array(), $WCFM->version );
 	  
 	  // WCFM Core CSS
 	  wp_enqueue_style( 'wcfm_core_css',  $WCFM->library->css_lib_url_min . 'wcfm-style-core.css', array(), $WCFM->version );

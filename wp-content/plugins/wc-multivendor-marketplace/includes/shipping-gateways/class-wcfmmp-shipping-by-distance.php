@@ -130,9 +130,10 @@ class WCFMmp_Shipping_By_Distance extends WC_Shipping_Method {
 			 $enable_local_pickup = isset($wcfmmp_shipping_by_distance['_enable_local_pickup']) ? 'yes' : '';
 			 $local_pickup_cost = isset($wcfmmp_shipping_by_distance['_local_pickup_cost']) ? $wcfmmp_shipping_by_distance['_local_pickup_cost'] : '';
 			 if( $enable_local_pickup ) {
+			 	 $address = wcfm_get_vendor_store_address_by_vendor( $vendor_id );
 			 	 $rate = array(
 						 'id'    => 'local_pickup:1',
-						 'label' => apply_filters( 'wcfmmp_local_pickup_shipping_option_label', __('Pickup from Store', 'wc-multivendor-marketplace') ),
+						 'label' => apply_filters( 'wcfmmp_local_pickup_shipping_option_label', __('Pickup from Store', 'wc-multivendor-marketplace') . ' ('.$address.')', $vendor_id ),
 						 'cost'  => $local_pickup_cost,
 						 'taxes' => $tax_rate
 				 );

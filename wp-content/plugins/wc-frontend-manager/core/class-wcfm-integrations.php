@@ -722,13 +722,15 @@ class WCFM_Integrations {
 			$wc_gzd_product = wc_gzd_get_product( $_product );
 			$_free_shipping = get_post_meta( $product_id, '_free_shipping', true ) ? get_post_meta( $product_id, '_free_shipping', true ) : 'no';
 			$delivery_time = $wc_gzd_product->get_delivery_time();
+			
+			if( $delivery_time ) $delivery_time = $delivery_time->term_id;
 		}
 		
 		$delivery_time_list = array( "" => __( 'Select Delivery Time', 'wc-frontend-manager' ) );
 		$terms = get_terms( 'product_delivery_time', array( 'hide_empty' => false ) );
 		if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 			foreach ( $terms as $term )
-				$delivery_time_list[ $term->slug ] = $term->name;
+				$delivery_time_list[ $term->term_id ] = $term->name;
 		}
 		
 		$woocommerce_germanized_shipping_fields =  array(
@@ -1088,6 +1090,10 @@ class WCFM_Integrations {
 			$wcfm_wc_german_market_pricing_fields['_gm_gtin'] = array('label' => __( 'GTIN', 'woocommerce-german-market' ) , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele variable', 'label_class' => 'wcfm_title variable' );
 		}
 		
+		if ( get_option( 'german_market_age_rating', 'off' ) == 'on' ) {
+			//$wcfm_wc_german_market_pricing_fields['_age_rating_age'] = array('label' => __( 'Required age to buy this product', 'woocommerce-german-market' ) . ' ('.__( 'Years', 'woocommerce-german-market' ).')', 'type' => 'number', 'class' => 'wcfm-text wcfm_ele variable wcfm_non_negative_input', 'label_class' => 'wcfm_title variable' );
+		}
+		
 	
 		
 		$variation_fileds = array_slice($variation_fileds, 0, 12, true) +
@@ -1109,6 +1115,7 @@ class WCFM_Integrations {
 			$variations[$variation_id_key]['_variable_used_setting_shipping_info'] = get_post_meta( $variation_id, '_variable_used_setting_shipping_info', true );
 			$variations[$variation_id_key]['_sale_label'] = get_post_meta( $variation_id, '_sale_label', true );
 			$variations[$variation_id_key]['_gm_gtin'] = get_post_meta( $variation_id, '_gm_gtin', true );
+			//$variations[$variation_id_key]['_age_rating_age'] = get_post_meta( $variation_id, '_age_rating_age', true );
 		}
 		
 		return $variations;

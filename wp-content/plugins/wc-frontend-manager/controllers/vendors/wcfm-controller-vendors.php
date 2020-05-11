@@ -44,29 +44,34 @@ class WCFM_Vendors_Controller {
 			$report_for = 'custom';
 		}
 		
-		$report_vendor = '';
+		$search_vendor = '';
 		if ( ! empty( $_POST['report_vendor'] ) ) {
-			$report_vendor = absint( $_POST['report_vendor'] );
+			$search_vendor = absint( $_POST['report_vendor'] );
 		}
 		
 		$report_membership = '';
 		if ( ! empty( $_POST['report_membership'] ) ) {
 			$report_membership = absint( $_POST['report_membership'] );
 			
-			if( !$report_vendor ) {
-				$report_vendor = (array) get_post_meta( $report_membership, 'membership_users', true );
+			if( !$search_vendor ) {
+				$search_vendor = (array) get_post_meta( $report_membership, 'membership_users', true );
 			}
 		}
 		
-		$wcfm_vendors_array = $WCFM->wcfm_vendor_support->wcfm_get_vendor_list( true, $offset, $length, '', $report_vendor );
+		$vendor_search_data = array();
+		if ( isset( $_POST['search_data'] ) && ! empty( $_POST['search_data'] ) ) {
+			$vendor_search_data = $_POST['search_data'];
+		}
+		
+		$wcfm_vendors_array = $WCFM->wcfm_vendor_support->wcfm_get_vendor_list( true, $offset, $length, '', $search_vendor, true, $vendor_search_data );
 		unset($wcfm_vendors_array[0]);
 		
 		// Get Vendor Count
-		$wcfm_all_vendors = $WCFM->wcfm_vendor_support->wcfm_get_vendor_list( true, '', '', '' );
+		$wcfm_all_vendors = $WCFM->wcfm_vendor_support->wcfm_get_vendor_list( true );
 		unset($wcfm_all_vendors[0]);
 		
 		// Get Filtered Vendor Count
-		$wcfm_filtered_vendors = $WCFM->wcfm_vendor_support->wcfm_get_vendor_list( true, '', '', '', $report_vendor );
+		$wcfm_filtered_vendors = $WCFM->wcfm_vendor_support->wcfm_get_vendor_list( true, '', '', '', $search_vendor, true, $vendor_search_data );
 		unset($wcfm_filtered_vendors[0]);
 		
 		$admin_fee_mode = apply_filters( 'wcfm_is_admin_fee_mode', false );

@@ -290,7 +290,7 @@ do_action( 'before_wcfm_enquiry_manage' );
 																																														"inquiry_customer_id"     => array( 'type' => 'hidden', 'value' => $inquiry_customer_id ),
 																																														"inquiry_customer_name"   => array( 'type' => 'hidden', 'value' => $inquiry_customer_name ),
 																																														"inquiry_customer_email"  => array( 'type' => 'hidden', 'value' => $inquiry_customer_email )
-																																														) );
+																																														), $inquiry_id );
 						
 						if( ( $wcfm_enquiry_allow_attachment == 'no' ) || !apply_filters( 'wcfm_is_allow_enquiry_reply_attachment', true ) ) {
 							if( isset( $wcfm_enquiry_reply_fields['inquiry_attachments'] ) ) unset( $wcfm_enquiry_reply_fields['inquiry_attachments'] );

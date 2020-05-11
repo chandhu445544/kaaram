@@ -143,8 +143,30 @@ class WCFM_Coupons_Manage_Controller {
 				if( WCFM_Dependencies::dokanpro_plugin_active_check() || function_exists( 'wcfmmp_get_store_url' ) ) {
 					if( isset( $wcfm_coupon_manager_form_data['show_on_store'] ) ) {
 						update_post_meta( $new_coupon_id, 'show_on_store', 'yes' );
+						
+						// Smart Coupon Support
+						if( apply_filters( 'wcfm_is_allow_added_coupon_as_global_coupon', true, $new_coupon_id ) ) {
+							update_post_meta( $new_coupon_id, 'sc_is_visible_storewide', 'yes' );
+							$global_coupons_list = get_option( 'sc_display_global_coupons' );
+							$global_coupons      = ( ! empty( $global_coupons_list ) ) ? explode( ',', $global_coupons_list ) : array();
+							$global_coupons[] = $new_coupon_id;
+							update_option( 'sc_display_global_coupons', implode( ',', array_unique( $global_coupons ) ), 'no' );
+						}
+				
 					} else {
 						update_post_meta( $new_coupon_id, 'show_on_store', 'no' );
+						
+						// Smart Coupon Support
+						if( apply_filters( 'wcfm_is_allow_added_coupon_as_global_coupon', true, $new_coupon_id ) ) {
+							update_post_meta( $new_coupon_id, 'sc_is_visible_storewide', 'yes' );
+							$global_coupons_list = get_option( 'sc_display_global_coupons' );
+							$global_coupons      = ( ! empty( $global_coupons_list ) ) ? explode( ',', $global_coupons_list ) : array();
+							$key                 = array_search( (string) $new_coupon_id, $global_coupons, true );
+							if ( false !== $key ) {
+								unset( $global_coupons[ $key ] );
+								update_option( 'sc_display_global_coupons', implode( ',', array_unique( $global_coupons ) ), 'no' );
+							}
+						}
 					}
 				}
 				

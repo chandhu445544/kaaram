@@ -174,6 +174,9 @@ class WCFM_Payments_Controller {
 				}
 				$wcfm_payments_json_arr[$index][] = $withdrawal_mode;
 				
+				// Additional Info
+				$wcfm_payments_json_arr[$index][] = apply_filters( 'wcfm_payments_additonal_data', '&ndash;', $wcfm_payments_single->ID, $wcfm_payments_single->order_ids, $wcfm_payments_single->commission_ids, $wcfm_payments_single->vendor_id );
+				
 				// Note
 				if( $wcfm_payments_single->withdraw_note ) {
 					$wcfm_payments_json_arr[$index][] = $wcfm_payments_single->withdraw_note;

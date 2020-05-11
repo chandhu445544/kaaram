@@ -581,6 +581,13 @@ jQuery(document).ready(function($) {
 					// Push marker to markers array                                   
 					markers.push(marker);
 				});
+				
+				if( wcfmmp_store_list_options.is_cluster ) {
+					const imagePath = wcfmmp_store_list_options.cluster_image;
+
+					const markerClusterer = new MarkerClusterer(store_list_map, markers, {imagePath: imagePath});
+				}
+				
 				if( $auto_zoom && locations.length > 0 ) {
 					store_list_map.fitBounds(latlngbounds);
 				}

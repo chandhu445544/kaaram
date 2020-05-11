@@ -154,10 +154,10 @@ if(WCFM_Dependencies::wcfm_geo_my_wp_plugin_active_check()) {
 }
 ?>
 
-    <?php if( $allow_seo = apply_filters( 'wcfm_is_allow_seo', true ) ) { ?>
+    <?php if( apply_filters( 'wcfm_is_allow_seo', true ) && apply_filters( 'wcfm_is_allow_pm_seo', true ) ) { ?>
 			<?php if( WCFM_Dependencies::wcfm_yoast_plugin_active_check() || WCFM_Dependencies::wcfm_yoast_premium_plugin_active_check() ) { ?>
 				<!-- collapsible 10 - Yoast SEO Support -->
-				<div class="page_collapsible products_manage_yoast simple variable grouped external booking" id="wcfm_products_manage_form_yoast_head"><label class="fab fa-yoast"></label>&nbsp;<?php _e('Yoast SEO', 'wc-frontend-manager'); ?><span></span></div>
+				<div class="page_collapsible products_manage_yoast simple variable grouped external booking" id="wcfm_products_manage_form_yoast_head"><label class="fab fa-yoast"></label>&nbsp;<?php _e('SEO', 'wc-frontend-manager'); ?><span></span></div>
 				<div class="wcfm-container simple variable external grouped booking">
 					<div id="wcfm_products_manage_form_yoast_expander" class="wcfm-content">
 						<?php
@@ -173,7 +173,7 @@ if(WCFM_Dependencies::wcfm_geo_my_wp_plugin_active_check()) {
 			<?php } ?>
 		<?php } ?>
 		
-		<?php if( $allow_seo = apply_filters( 'wcfm_is_allow_seo', true ) ) { ?>
+		<?php if( apply_filters( 'wcfm_is_allow_seo', true ) && apply_filters( 'wcfm_is_allow_pm_seo', true ) ) { ?>
 			<?php if( WCFM_Dependencies::wcfm_all_in_one_seo_plugin_active_check() || WCFM_Dependencies::wcfm_all_in_one_seo_pro_plugin_active_check() ) { ?>
 				<!-- collapsible 10 - All in One SEO Support -->
 				<div class="page_collapsible products_manage_yoast simple variable grouped external booking" id="wcfm_products_manage_form_yoast_head"><label class="wcfmfa fa-globe"></label>&nbsp;<?php _e('SEO', 'wc-frontend-manager'); ?><span></span></div>
@@ -192,7 +192,7 @@ if(WCFM_Dependencies::wcfm_geo_my_wp_plugin_active_check()) {
 			<?php } ?>
 		<?php } ?>
 		
-		<?php if( $allow_seo = apply_filters( 'wcfm_is_allow_seo', true ) ) { ?>
+		<?php if( apply_filters( 'wcfm_is_allow_seo', true ) && apply_filters( 'wcfm_is_allow_pm_seo', true ) ) { ?>
 			<?php if( WCFM_Dependencies::wcfm_rankmath_seo_plugin_active_check() ) { ?>
 				<!-- collapsible 10 - Rank Math SEO Support -->
 				<div class="page_collapsible products_manage_yoast simple variable grouped external booking" id="wcfm_products_manage_form_yoast_head"><label class="wcfmfa fa-globe"></label>&nbsp;<?php _e('SEO', 'wc-frontend-manager'); ?><span></span></div>

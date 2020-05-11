@@ -329,11 +329,11 @@ if( !function_exists( 'wcfm_get_vendor_store_logo_by_post' ) ) {
 	}
 }
 
-if( !function_exists( 'wcfm_get_vendor_store_address_by_vendor' ) ) {
+if( !function_exists( 'wcfm_get_vendor_store_logo_by_vendor' ) ) {
 	function wcfm_get_vendor_store_logo_by_vendor( $vendor_id = '' ) {
 		global $WCFM;
 		if( $vendor_id  ) {
-			$store_address = '';
+			$store_logo = '';
 			if( $WCFM && $WCFM->wcfm_vendor_support ) {
 				$store_logo = $WCFM->wcfm_vendor_support->wcfm_get_vendor_logo_by_vendor( $vendor_id );
 			}

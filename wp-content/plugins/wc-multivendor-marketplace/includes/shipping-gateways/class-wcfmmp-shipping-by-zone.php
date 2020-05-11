@@ -323,6 +323,11 @@ class WCFMmp_Shipping_By_Zone extends WC_Shipping_Method {
 			if ( ! $has_costs ) {
 					continue;
 			}
+			
+			if ( 'local_pickup' == $method['id'] ) {
+				$address = wcfm_get_vendor_store_address_by_vendor( $vendor_id );
+				$method['title'] = apply_filters( 'wcfmmp_local_pickup_shipping_option_label', $method['title']  . ' ('.$address.')', $vendor_id );
+			}
 
 			$rates[] = array(
 					'id'          => $this->get_method_rate_id( $method ),

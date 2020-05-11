@@ -456,7 +456,6 @@ class WCFMmp_Admin {
 		$WCFM->wcfm_fields->wcfm_generate_form_field( array(
 																												'tax_enable' => array( 'type' => 'checkbox', 'name' => 'commission[tax_enable]', 'class' => 'wcfm-checkbox wcfm_ele commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'label_class' => 'wcfm_title checkbox_title commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'value' => 'yes', 'dfvalue' => $tax_enable ),
 																												) );
-		echo '<br/><br><span class="desciption">' . __( 'Enable this to deduct tax from vendor\'s commission.', 'wc-multivendor-marketplace' ) . '</span>';
 		echo '</p>';
 		
 		echo '<p class="form-field _wcfmmp_commission_fixed_field commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity"><label for="vendor_commission_fixed">' . __( 'Tax Label', 'wc-multivendor-marketplace' ) . '</label>';
@@ -650,7 +649,6 @@ class WCFMmp_Admin {
 		$WCFM->wcfm_fields->wcfm_generate_form_field( array(
 																												'tax_enable' => array( 'type' => 'checkbox', 'name' => 'commission[tax_enable]', 'class' => 'wcfm-checkbox wcfm_ele commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'label_class' => 'wcfm_title checkbox_title commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'value' => 'yes', 'dfvalue' => $tax_enable ),
 																												) );
-		echo '<br/><br><span class="desciption">' . __( 'Enable this to deduct tax from vendor\'s commission.', 'wc-multivendor-marketplace' ) . '</span>';
 		echo '</p>';
 		
 		echo '<p class="form-field _wcfmmp_commission_fixed_field commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity"><label for="vendor_commission_fixed">' . __( 'Tax Label', 'wc-multivendor-marketplace' ) . '</label>';
@@ -714,7 +712,7 @@ class WCFMmp_Admin {
 		echo '<tr><th colspan="2"><h3 class="form-field commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity" style="color:#17a2b8;">' . __('Commission Tax Settings', 'wc-multivendor-marketplace') . '</h3></th></tr>';
 		
 		$WCFM->wcfm_fields->wcfm_generate_form_field( array(
-																												'tax_enable' => array( 'label' => __( 'Enable', 'wc-multivendor-marketplace' ), 'type' => 'checkbox', 'name' => 'commission[tax_enable]', 'in_table' => true, 'class' => 'wcfm-checkbox wcfm_ele commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'label_class' => 'wcfm_title checkbox_title commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'value' => 'yes', 'dfvalue' => $tax_enable, 'desc_class' => 'commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'desc' => __( 'Enable this to deduct tax from vendor\'s commission.', 'wc-multivendor-marketplace' ) ),
+																												'tax_enable' => array( 'label' => __( 'Enable', 'wc-multivendor-marketplace' ), 'type' => 'checkbox', 'name' => 'commission[tax_enable]', 'in_table' => true, 'class' => 'wcfm-checkbox wcfm_ele commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'label_class' => 'wcfm_title checkbox_title commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'value' => 'yes', 'dfvalue' => $tax_enable ),
 																												) );
 		
 		$WCFM->wcfm_fields->wcfm_generate_form_field( array(

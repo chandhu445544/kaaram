@@ -78,17 +78,17 @@ $store_description = $store_user->get_shop_description();
 						<div class="spacer"></div>
 					</div>
 					
-					<?php if ( $store_address && ( $store_info['store_hide_address'] == 'no' ) && $WCFM->wcfm_vendor_support->wcfm_vendor_has_capability( $store_id, 'vendor_address' ) ): ?>
+					<?php if ( $store_address && ( $store_info['store_hide_address'] == 'no' ) && wcfm_vendor_has_capability( $store_id, 'vendor_address' ) ): ?>
 						<p class="store-address"><?php echo $store_address; ?></p>
 					<?php endif ?>
 					
-					<?php if ( !empty( $store_user->get_email() ) && ( $store_info['store_hide_email'] == 'no' ) && $WCFM->wcfm_vendor_support->wcfm_vendor_has_capability( $store_id, 'vendor_email' ) ) { ?>
+					<?php if ( !empty( $store_user->get_email() ) && ( $store_info['store_hide_email'] == 'no' ) && wcfm_vendor_has_capability( $store_id, 'vendor_email' ) ) { ?>
 						<p class="store-phone">
 							<i class="wcfmfa fa-envelope" aria-hidden="true"></i> <?php echo esc_html( $store_user->get_email() ); ?>
 						</p>
 					<?php } ?>
 
-					<?php if ( !empty( $store_info['phone'] ) && ( $store_info['store_hide_phone'] == 'no' ) && $WCFM->wcfm_vendor_support->wcfm_vendor_has_capability( $store_id, 'vendor_phone' ) ) { ?>
+					<?php if ( !empty( $store_info['phone'] ) && ( $store_info['store_hide_phone'] == 'no' ) && wcfm_vendor_has_capability( $store_id, 'vendor_phone' ) ) { ?>
 						<p class="store-phone">
 							<i class="wcfmfa fa-phone" aria-hidden="true"></i> <?php echo esc_html( $store_info['phone'] ); ?>
 						</p>

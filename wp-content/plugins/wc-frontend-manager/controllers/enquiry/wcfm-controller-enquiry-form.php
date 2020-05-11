@@ -142,9 +142,9 @@ class WCFM_Enquiry_Form_Controller {
 				if( $vendor_id ) $enquiry_for_label = wcfm_get_vendor_store_name( $vendor_id ) . ' ' . __( 'Store', 'wc-frontend-manager' );
 				if( $product_id ) $enquiry_for_label = get_the_title( $product_id );
 				
-				$enquiry_for = '<a target="_blank" class="wcfm_dashboard_item_title" href="' . get_wcfm_enquiry_url() . '">' . __( 'Store', 'wc-frontend-manager' ) . '</a>';
-				if( $vendor_id ) $enquiry_for = '<a target="_blank" class="wcfm_dashboard_item_title" href="' . get_wcfm_enquiry_url() . '">' . wcfm_get_vendor_store_name( $vendor_id ) . ' ' . apply_filters( 'wcfm_sold_by_label', $vendor_id, __( 'Store', 'wc-frontend-manager' ) ) . '</a>';
-				if( $product_id ) $enquiry_for = '<a target="_blank" class="wcfm_dashboard_item_title" href="' . get_wcfm_enquiry_url() . '">' . get_the_title( $product_id ) . '</a>';
+				//$enquiry_for = '<a target="_blank" class="wcfm_dashboard_item_title" href="' . get_wcfm_enquiry_url() . '">' . __( 'Store', 'wc-frontend-manager' ) . '</a>';
+				//if( $vendor_id ) $enquiry_for = '<a target="_blank" class="wcfm_dashboard_item_title" href="' . get_wcfm_enquiry_url() . '">' . wcfm_get_vendor_store_name( $vendor_id ) . ' ' . apply_filters( 'wcfm_sold_by_label', $vendor_id, __( 'Store', 'wc-frontend-manager' ) ) . '</a>';
+				//if( $product_id ) $enquiry_for = '<a target="_blank" class="wcfm_dashboard_item_title" href="' . get_wcfm_enquiry_url() . '">' . get_the_title( $product_id ) . '</a>';
 				
 				/*$mail_to = apply_filters( 'wcfm_admin_email_notification_receiver', get_bloginfo( 'admin_email' ), 'enquiry' );
 				$reply_mail_subject = "{site_name}: " . __( "New enquiry for", "wc-frontend-manager" ) . " - {enquiry_for}";
@@ -220,8 +220,16 @@ class WCFM_Enquiry_Form_Controller {
 								$WCFM->wcfm_notification->wcfm_send_direct_message( -1, $vendor_id, 1, 0, $wcfm_messages, 'enquiry', false );
 							}
 						}
+						
+						// Vendor Transient Clear
+						$cache_key = 'wcfm-notification-enquiry-' . $vendor_id;
+						delete_transient( $cache_key );
 					}
 				}
+				
+				// Admin Transient Clear
+				$cache_key = 'wcfm-notification-enquiry-0';
+				delete_transient( $cache_key );
 				
 				do_action( 'wcfm_after_enquiry_submit',  $enquiry_id, $customer_id, $product_id, $vendor_id, $enquiry, $wcfm_enquiry_tab_form_data );
 			}

@@ -1,0 +1,32 @@
+2020-05-11T17:35:10+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 1183744 bytes) in /opt/bitnami/apps/wordpress/htdocs/wp-includes/wp-db.php on line 1989
+
+2020-05-11T17:50:21+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 1183744 bytes) in /opt/bitnami/apps/wordpress/htdocs/wp-includes/wp-db.php on line 1989
+
+2020-05-11T18:05:34+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 1179648 bytes) in /opt/bitnami/apps/wordpress/htdocs/wp-includes/wp-db.php on line 1989
+
+2020-05-11T18:20:20+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 1183744 bytes) in /opt/bitnami/apps/wordpress/htdocs/wp-includes/wp-db.php on line 1989
+
+2020-05-11T18:36:30+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 1179648 bytes) in /opt/bitnami/apps/wordpress/htdocs/wp-includes/wp-db.php on line 1989
+
+2020-05-11T18:50:12+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 1183744 bytes) in /opt/bitnami/apps/wordpress/htdocs/wp-includes/wp-db.php on line 1989
+
+2020-05-11T19:05:33+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 1183744 bytes) in /opt/bitnami/apps/wordpress/htdocs/wp-includes/wp-db.php on line 1989
+
+2020-05-11T19:21:57+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 1183744 bytes) in /opt/bitnami/apps/wordpress/htdocs/wp-includes/wp-db.php on line 1989
+
+2020-05-11T19:42:27+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 1179648 bytes) in /opt/bitnami/apps/wordpress/htdocs/wp-includes/wp-db.php on line 1989
+
+2020-05-11T20:20:06+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 1179648 bytes) in /opt/bitnami/apps/wordpress/htdocs/wp-includes/wp-db.php on line 1989
+
+2020-05-11T20:21:19+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 1179648 bytes) in /opt/bitnami/apps/wordpress/htdocs/wp-includes/wp-db.php on line 1989
+
+2020-05-11T20:35:47+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 1179648 bytes) in /opt/bitnami/apps/wordpress/htdocs/wp-includes/wp-db.php on line 1989
+
+2020-05-11T20:52:02+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 1179648 bytes) in /opt/bitnami/apps/wordpress/htdocs/wp-includes/wp-db.php on line 1989
+
+2020-05-11T21:05:16+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 1179648 bytes) in /opt/bitnami/apps/wordpress/htdocs/wp-includes/wp-db.php on line 1989
+
+2020-05-11T21:20:46+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 1179648 bytes) in /opt/bitnami/apps/wordpress/htdocs/wp-includes/wp-db.php on line 1989
+
+2020-05-11T21:35:09+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 1179648 bytes) in /opt/bitnami/apps/wordpress/htdocs/wp-includes/wp-db.php on line 1989
+

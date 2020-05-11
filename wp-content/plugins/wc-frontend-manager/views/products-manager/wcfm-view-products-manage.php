@@ -771,7 +771,7 @@ if ( $product_id && defined( 'ICL_SITEPRESS_VERSION' ) && ! ICL_PLUGIN_INACTIVE 
 														<div class="wcfm_clearfix"></div>
 														<?php
 														if( WCFM_Dependencies::wcfmu_plugin_active_check() ) {
-															if( apply_filters( 'wcfm_is_allow_add_category', true ) && apply_filters( 'wcfm_is_allow_add_taxonomy', true ) && apply_filters( 'wcfm_is_allow_add_'.$product_taxonomy->name, true ) ) {
+															if( apply_filters( 'wcfm_is_allow_add_taxonomy', true ) && apply_filters( 'wcfm_is_allow_add_'.$product_taxonomy->name, true ) ) {
 																?>
 																<div class="wcfm_add_new_category_box wcfm_add_new_taxonomy_box">
 																	<p class="description wcfm_full_ele wcfm_side_add_new_category wcfm_add_new_category wcfm_add_new_taxonomy">+<?php echo __( 'Add new', 'wc-frontend-manager' ) . ' ' . apply_filters( 'wcfm_taxonomy_custom_label', __( $product_taxonomy->label, 'wc-frontend-manager' ), $product_taxonomy->name ); ?></p>

@@ -70,7 +70,7 @@ class WCFMmp_Shortcode {
 				'map'                => 'yes',
 				'map_zoom'           => 5,
 				'auto_zoom'          => 'yes',
-				'per_row'            => 2,
+				'per_row'            => 3,
 				'includes'           => '',
 				'excludes'           => '',
 				'include_membership' => '',

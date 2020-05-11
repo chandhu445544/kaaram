@@ -2921,7 +2921,7 @@ class WCFMmp_Vendor {
 		if( !empty( $search_data ) ) {
 			foreach( $search_data as $search_key => $search_value ) {
 				if( !$search_value ) continue;
-				if( in_array( $search_key, apply_filters( 'wcfmmp_vendor_list_exclude_search_keys', array( 'v', 'search_term', 'wcfmmp_store_search', 'wcfmmp_store_category', 'wcfmmp_radius_addr', 'wcfmmp_radius_lat', 'wcfmmp_radius_lng', 'wcfmmp_radius_range', 'pagination_base', 'wcfm_paged', 'paged', 'per_row', 'per_page', 'excludes', 'orderby', 'has_product', 'theme', 'nonce', 'lang' ) ) ) ) continue;
+				if( in_array( $search_key, apply_filters( 'wcfmmp_vendor_list_exclude_search_keys', array( 'v', 'search_term', 'wcfmmp_store_search', 'wcfmsc_store_categories', 'wcfmmp_store_category', 'wcfmmp_radius_addr', 'wcfmmp_radius_lat', 'wcfmmp_radius_lng', 'wcfmmp_radius_range', 'pagination_base', 'wcfm_paged', 'paged', 'per_row', 'per_page', 'excludes', 'orderby', 'has_product', 'theme', 'nonce', 'lang' ) ) ) ) continue;
 				if( $search ) $args['meta_query']['relation'] = 'AND';
 				$args['meta_query'][] = array(
 					                             'relation' => 'OR',

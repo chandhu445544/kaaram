@@ -93,6 +93,7 @@ if( isset( $WCFMmp->wcfmmp_withdrawal_options['withdrawal_mode'] ) ) {
 								<th><?php _e( 'My Earnings', 'wc-frontend-manager' ); ?></th>
 								<th><?php _e( 'Charges', 'wc-frontend-manager' ); ?></th>
 								<th><?php _e( 'Payment', 'wc-frontend-manager' ); ?></th>
+								<th><?php _e( apply_filters( 'wcfm_withdrawal_additional_info_column_label', __( 'Additional Info', 'wc-frontend-manager' ) ) ); ?></th>
 								<th><?php _e( 'Date', 'wc-frontend-manager' ); ?></th>
 							</tr>
 						</thead>
@@ -106,6 +107,7 @@ if( isset( $WCFMmp->wcfmmp_withdrawal_options['withdrawal_mode'] ) ) {
 								<th><?php _e( 'My Earnings', 'wc-frontend-manager' ); ?></th>
 								<th><?php _e( 'Charges', 'wc-frontend-manager' ); ?></th>
 								<th><?php _e( 'Payment', 'wc-frontend-manager' ); ?></th>
+								<th><?php _e( apply_filters( 'wcfm_withdrawal_additional_info_column_label', __( 'Additional Info', 'wc-frontend-manager' ) ) ); ?></th>
 								<th><?php _e( 'Date', 'wc-frontend-manager' ); ?></th>
 							</tr>
 						</tfoot>

@@ -640,7 +640,8 @@ class WCFMmp {
 		require_once ( $WCFMmp->plugin_path . 'helpers/class-wcfmmp-install.php' );
 		$WCFMmp_Install = new WCFMmp_Install();
 		
-		update_option('wcfmmp_installed', 1);
+		update_option( 'wcfmmp_updated_3_3_10', 1 );
+		update_option( 'wcfmmp_installed', 1 );
 	}
 	
 	/**
@@ -654,7 +655,15 @@ class WCFMmp {
 		
 		$wcfm_marketplace_tables = $wpdb->query( "SHOW tables like '{$wpdb->prefix}wcfm_marketplace_reverse_withdrawal_meta'");
 		if( !$wcfm_marketplace_tables ) {
+			delete_option( 'wcfmmp_updated_3_3_10' );
 			delete_option( 'wcfmmp_table_install' );
+		}
+		
+		if( !get_option( 'wcfmmp_updated_3_3_10' ) ) {
+			delete_option( 'wcfmmp_table_install' );
+			require_once ( $WCFMmp->plugin_path . 'helpers/class-wcfmmp-install.php' );
+			$WCFMmp_Install = new WCFMmp_Install();
+			update_option( 'wcfmmp_updated_3_3_10', 1 );
 		}
 		
 		if ( !get_option("wcfmmp_page_install") || !get_option("wcfmmp_table_install") ) {

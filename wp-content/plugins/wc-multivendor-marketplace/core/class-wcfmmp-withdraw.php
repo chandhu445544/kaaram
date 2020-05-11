@@ -256,6 +256,14 @@ class WCFMmp_Withdraw {
 	public function wcfmmp_withdrawal_processed( $vendor_id, $order_ids, $commission_ids, $payment_method, $grosse_total, $withdraw_amount, $withdraw_charges = 0, $withdraw_status = 'pending', $withdraw_mode = 'by_request', $is_auto_withdrawal = 0 ) {
 		global $WCFM, $WCFMmp, $wpdb;
 		
+		$order_ids_array = explode( ",", $order_ids );
+		$order_ids_array = array_unique( $order_ids_array );
+		$order_ids       = implode( ",", $order_ids_array );
+		
+		$commission_ids_array = explode( ",", $commission_ids );
+		$commission_ids_array = array_unique( $commission_ids_array );
+		$commission_ids       = implode( ",", $commission_ids_array );
+		
 		$wpdb->query(
 						$wpdb->prepare(
 							"INSERT INTO `{$wpdb->prefix}wcfm_marketplace_withdraw_request` 

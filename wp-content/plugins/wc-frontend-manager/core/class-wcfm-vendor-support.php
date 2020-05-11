@@ -356,6 +356,8 @@ class WCFM_Vendor_Support {
 					$display_value = __( 'Store Shipping by Country', 'wc-frontend-manager' );
 				} elseif( $display_value == 'wcfmmp_product_shipping_by_weight' ) {
 					$display_value = __( 'Store Shipping by Weight', 'wc-frontend-manager' );
+				} elseif( $display_value == 'wcfmmp_product_shipping_by_distance' ) {
+					$display_value = __( 'Store Shipping by Distance', 'wc-frontend-manager' );
 				} else {
 					$display_value = ucfirst( str_replace( '_', ' ', $display_value ) );
 				}
@@ -1012,7 +1014,7 @@ class WCFM_Vendor_Support {
   	return $dokan_new_urls;
   }
   
-  function wcfm_get_vendor_list( $all = false, $offset = '', $number = '', $search = '', $allow_vendors_list = '', $is_disabled_vendors = true ) {
+  function wcfm_get_vendor_list( $all = false, $offset = '', $number = '', $search = '', $allow_vendors_list = '', $is_disabled_vendors = true, $vendor_search_data = array() ) {
   	global $WCFM;
   	
   	$is_marketplace = wcfm_is_marketplace();
@@ -1110,6 +1112,28 @@ class WCFM_Vendor_Support {
 																				),
 																		);
 					}
+					
+					if( !empty( $vendor_search_data ) && is_array( $vendor_search_data ) ) {
+						foreach( $vendor_search_data as $search_key => $search_value ) {
+							if( !$search_value ) continue;
+							if( in_array( $search_key, apply_filters( 'wcfmmp_vendor_list_exclude_search_keys', array( 'v', 'search_term', 'wcfmmp_store_search', 'wcfmmp_store_category', 'wcfmmp_radius_addr', 'wcfmmp_radius_lat', 'wcfmmp_radius_lng', 'wcfmmp_radius_range', 'pagination_base', 'wcfm_paged', 'paged', 'per_row', 'per_page', 'excludes', 'orderby', 'has_product', 'theme', 'nonce', 'lang' ) ) ) ) continue;
+							if( $search ) $args['meta_query']['relation'] = 'AND';
+							$args['meta_query'][] = array(
+																						 'relation' => 'OR',
+																						 array(
+																								'key'     => str_replace( 'wcfmmp_store_', '', $search_key ),
+																								'value'   => $search_value,
+																								'compare' => 'LIKE'
+																						),
+																						array(
+																								'key'     => str_replace( 'wcfmmp_store_', '_wcfm_', $search_key ),
+																								'value'   => $search_value,
+																								'compare' => 'LIKE'
+																						)
+																					);
+						}
+					}
+					
 					$all_users = get_users( $args );
 					if( !empty( $all_users ) ) {
 						foreach( $all_users as $all_user ) {

@@ -9,8 +9,12 @@
  */
 class WCFM_Notification {
 	
+	public $cache_group = '';
+	
 	public function __construct() {
 		global $WCFM;
+		
+		$this->cache_group = 'wcfm-notification';
 		
 		// Order notification on WCFM Message
 		if( apply_filters( 'wcfm_is_allow_orders_extended_notifications', true ) ) {
@@ -287,56 +291,85 @@ class WCFM_Notification {
 		$total_mesaages = 0;
 		if( $message_type == 'enquiry' ) {
 			if( apply_filters( 'wcfm_is_pref_enquiry', true ) && apply_filters( 'wcfm_is_allow_enquiry', true ) ) {
-				$sql = "SELECT COUNT(wcfm_enquiries.ID) FROM {$wpdb->prefix}wcfm_enquiries AS wcfm_enquiries";
-				$sql .= " WHERE 1=1";
-				$sql .= " AND `reply` = ''";
 				if( wcfm_is_vendor() ) { 
-					$sql .= " AND `vendor_id` = {$message_to}";
+					$cache_key = $this->cache_group . '-enquiry-' . $message_to;
+				} else {
+					$cache_key = $this->cache_group . '-enquiry-0';
 				}
-				$sql = apply_filters( 'wcfm_enquery_list_query', $sql );
-				$total_mesaages = $wpdb->get_var( $sql );
+				$total_mesaages = get_transient( $cache_key );
+				
+				if( empty( $total_mesaages ) ) {
+					$sql = "SELECT COUNT(wcfm_enquiries.ID) FROM {$wpdb->prefix}wcfm_enquiries AS wcfm_enquiries";
+					$sql .= " WHERE 1=1";
+					$sql .= " AND `reply` = ''";
+					if( wcfm_is_vendor() ) { 
+						$sql .= " AND `vendor_id` = {$message_to}";
+					}
+					$sql = apply_filters( 'wcfm_enquery_list_query', $sql );
+					$total_mesaages = $wpdb->get_var( $sql );
+					
+					set_transient( $cache_key, $total_mesaages );
+				}
 			}
 		} elseif( $message_type == 'notice' ) {
 			if( ( $message_type == 'notice' ) && apply_filters( 'wcfm_is_pref_notice', true ) && apply_filters( 'wcfm_is_allow_notice', true ) ) {
-				$args = array(
-							'posts_per_page'   => -1,
-							'offset'           => 0,
-							'post_type'        => 'wcfm_notice',
-							'post_parent'      => 0,
-							'post_status'      => array('publish'),
-							'suppress_filters' => 0 
-						);
-				$args = apply_filters( 'wcfm_notice_args', $args );
-		
-				$wcfm_notices_array = get_posts( $args );
-				$total_mesaages = count($wcfm_notices_array);
+				$cache_key = $this->cache_group . '-notice';
+				$total_mesaages = get_transient( $cache_key );
+				
+				if( empty( $total_mesaages ) ) {
+					$args = array(
+								'posts_per_page'   => -1,
+								'offset'           => 0,
+								'post_type'        => 'wcfm_notice',
+								'post_parent'      => 0,
+								'post_status'      => array('publish'),
+								'suppress_filters' => 0 
+							);
+					$args = apply_filters( 'wcfm_notice_args', $args );
+			
+					$wcfm_notices_array = get_posts( $args );
+					$total_mesaages = count($wcfm_notices_array);
+					
+					set_transient( $cache_key, $total_mesaages );
+				}
 			}
 		} else {
 			if( ( $message_type == 'message' ) && apply_filters( 'wcfm_is_allow_notifications', true ) ) {
-				$sql = 'SELECT COUNT(wcfm_messages.ID) FROM ' . $wpdb->prefix . 'wcfm_messages AS wcfm_messages';
-				$sql .= ' WHERE 1=1';
-				
-				
-				$status_filter = " AND `is_direct_message` = 1";
-				$sql .= $status_filter;
-				
-				if( wcfm_is_vendor() || ( function_exists( 'wcfm_is_delivery_boy' ) && wcfm_is_delivery_boy() ) || ( function_exists( 'wcfm_is_affiliate' ) && wcfm_is_affiliate() ) ) { 
-					//$vendor_filter = " AND `author_is_admin` = 1";
-					$vendor_filter = " AND ( `author_id` = {$message_to} OR `message_to` = -1 OR `message_to` = {$message_to} )";
-					$sql .= $vendor_filter;
+				if( wcfm_is_vendor() || ( function_exists( 'wcfm_is_delivery_boy' ) && wcfm_is_delivery_boy() ) || ( function_exists( 'wcfm_is_affiliate' ) && wcfm_is_affiliate() ) ) {
+					$cache_key = $this->cache_group . '-message-' . $message_to;
 				} else {
-					$group_manager_filter = apply_filters( 'wcfm_notification_group_manager_filter', '' );
-					if( $group_manager_filter ) {
-						$sql .= $group_manager_filter;
-					} else {
-						$sql .= " AND `author_id` != -1";
-					}
+					$cache_key = $this->cache_group . '-message-0';
 				}
+				$total_mesaages = get_transient( $cache_key );
 				
-				$message_status_filter = " AND NOT EXISTS (SELECT * FROM {$wpdb->prefix}wcfm_messages_modifier as wcfm_messages_modifier_2 WHERE wcfm_messages.ID = wcfm_messages_modifier_2.message AND wcfm_messages_modifier_2.read_by={$message_to})";
-				$sql .= $message_status_filter;
-				
-				$total_mesaages = $wpdb->get_var( $sql );
+				if( empty( $total_mesaages ) ) {
+					$sql = 'SELECT COUNT(wcfm_messages.ID) FROM ' . $wpdb->prefix . 'wcfm_messages AS wcfm_messages';
+					$sql .= ' WHERE 1=1';
+					
+					
+					$status_filter = " AND `is_direct_message` = 1";
+					$sql .= $status_filter;
+					
+					if( wcfm_is_vendor() || ( function_exists( 'wcfm_is_delivery_boy' ) && wcfm_is_delivery_boy() ) || ( function_exists( 'wcfm_is_affiliate' ) && wcfm_is_affiliate() ) ) { 
+						//$vendor_filter = " AND `author_is_admin` = 1";
+						$vendor_filter = " AND ( `author_id` = {$message_to} OR `message_to` = -1 OR `message_to` = {$message_to} )";
+						$sql .= $vendor_filter;
+					} else {
+						$group_manager_filter = apply_filters( 'wcfm_notification_group_manager_filter', '' );
+						if( $group_manager_filter ) {
+							$sql .= $group_manager_filter;
+						} else {
+							$sql .= " AND `author_id` != -1";
+						}
+					}
+					
+					$message_status_filter = " AND NOT EXISTS (SELECT * FROM {$wpdb->prefix}wcfm_messages_modifier as wcfm_messages_modifier_2 WHERE wcfm_messages.ID = wcfm_messages_modifier_2.message AND wcfm_messages_modifier_2.read_by={$message_to})";
+					$sql .= $message_status_filter;
+					
+					$total_mesaages = $wpdb->get_var( $sql );
+					
+					set_transient( $cache_key, $total_mesaages );
+				}
 			}
 		}
 		
@@ -379,6 +412,16 @@ class WCFM_Notification {
 																		VALUES
 																		({$messageid}, 1, {$author_id}, '{$todate}')";
 				$wpdb->query($wcfm_read_message);
+			}
+			
+			if( $message_to ) {
+				// Vendor Transient
+				$cache_key = $this->cache_group . '-message-' . $message_to;
+				delete_transient( $cache_key );
+			} else {
+				// Admin Transient
+				$cache_key = $this->cache_group . '-message-0';
+				delete_transient( $cache_key );
 			}
 		}
 		
@@ -520,14 +563,21 @@ class WCFM_Notification {
   	global $WCFM, $wpdb, $_POST;
   	
   	$messageid = absint( $_POST['messageid'] );
-  	$author_id = apply_filters( 'wcfm_message_author', get_current_user_id() );
+  	$message_to = apply_filters( 'wcfm_message_author', get_current_user_id() );
   	$todate = date('Y-m-d H:i:s');
   	
   	$wcfm_read_message     = "INSERT into {$wpdb->prefix}wcfm_messages_modifier 
 																(`message`, `is_read`, `read_by`, `read_on`)
 																VALUES
-																({$messageid}, 1, {$author_id}, '{$todate}')";
+																({$messageid}, 1, {$message_to}, '{$todate}')";
 		$wpdb->query($wcfm_read_message);
+		
+		if( wcfm_is_vendor() || ( function_exists( 'wcfm_is_delivery_boy' ) && wcfm_is_delivery_boy() ) || ( function_exists( 'wcfm_is_affiliate' ) && wcfm_is_affiliate() ) ) {
+			$cache_key = $this->cache_group . '-message-' . $message_to;
+		} else {
+			$cache_key = $this->cache_group . '-message-0';
+		}
+		delete_transient( $cache_key );
 		
 		die;
   }
@@ -543,18 +593,26 @@ class WCFM_Notification {
   	if( isset($_POST['selected_messages']) ) {
 			$selected_messages = wc_clean( $_POST['selected_messages'] );
 			if( is_array( $selected_messages ) && !empty( $selected_messages ) ) {
+				$message_to = apply_filters( 'wcfm_message_author', get_current_user_id() );
 				foreach( $selected_messages as $messageid ) {
-					$author_id = apply_filters( 'wcfm_message_author', get_current_user_id() );
 					$todate = date('Y-m-d H:i:s');
 					
 					$wcfm_read_message     = "INSERT into {$wpdb->prefix}wcfm_messages_modifier 
 																			(`message`, `is_read`, `read_by`, `read_on`)
 																			VALUES
-																			({$messageid}, 1, {$author_id}, '{$todate}')";
+																			({$messageid}, 1, {$message_to}, '{$todate}')";
 					$wpdb->query($wcfm_read_message);
 				}
+				
+				if( wcfm_is_vendor() || ( function_exists( 'wcfm_is_delivery_boy' ) && wcfm_is_delivery_boy() ) || ( function_exists( 'wcfm_is_affiliate' ) && wcfm_is_affiliate() ) ) {
+					$cache_key = $this->cache_group . '-message-' . $message_to;
+				} else {
+					$cache_key = $this->cache_group . '-message-0';
+				}
+				delete_transient( $cache_key );
 			}
 		}
+		
 		echo '{ "status": true }';
 		die;
   }
@@ -570,6 +628,15 @@ class WCFM_Notification {
   	$messageid = absint( $_POST['messageid'] );
   	$wpdb->query( "DELETE FROM {$wpdb->prefix}wcfm_messages WHERE `ID` = {$messageid}" );
   	$wpdb->query( "DELETE FROM {$wpdb->prefix}wcfm_messages_modifier WHERE `message` = {$messageid}" );
+  	
+  	if( wcfm_is_vendor() || ( function_exists( 'wcfm_is_delivery_boy' ) && wcfm_is_delivery_boy() ) || ( function_exists( 'wcfm_is_affiliate' ) && wcfm_is_affiliate() ) ) {
+			$message_to = apply_filters( 'wcfm_message_author', get_current_user_id() );
+			$cache_key = $this->cache_group . '-message-' . $message_to;
+		} else {
+			$cache_key = $this->cache_group . '-message-0';
+		}
+		delete_transient( $cache_key );
+  	
   	echo '{ "status": true }';
 		die;
   }
@@ -589,6 +656,14 @@ class WCFM_Notification {
 					$wpdb->query( "DELETE FROM {$wpdb->prefix}wcfm_messages WHERE `ID` = {$messageid}" );
 					$wpdb->query( "DELETE FROM {$wpdb->prefix}wcfm_messages_modifier WHERE `message` = {$messageid}" );
 				}
+				
+				if( wcfm_is_vendor() || ( function_exists( 'wcfm_is_delivery_boy' ) && wcfm_is_delivery_boy() ) || ( function_exists( 'wcfm_is_affiliate' ) && wcfm_is_affiliate() ) ) {
+					$message_to = apply_filters( 'wcfm_message_author', get_current_user_id() );
+					$cache_key = $this->cache_group . '-message-' . $message_to;
+				} else {
+					$cache_key = $this->cache_group . '-message-0';
+				}
+				delete_transient( $cache_key );
 			}
 		}
   	echo '{ "status": true }';

@@ -767,9 +767,30 @@ if ( ! function_exists( '_wp_render_title_tag' ) )
 }
     
 
+/**
+ * Remove product data tabs
+ */
+add_filter( 'woocommerce_product_tabs', 'woo_rorder_tabs', 98 );
 
+//add_filter( 'wcfm_is_allow_policy_settings', '_return_false');
+//add_filter( 'wcfm_is_allow_enquiry_settings', '_return_false');
+//add_filter( 'wcfm_is_allow_enquiry_settings', '_return_false');
+
+function woo_rorder_tabs( $tabs ) {
+	
+	$tabs['reviews']['priority']=100;
+	$tabs['description']['priority']=99;
+
+//     unset( $tabs['tab-wcfm_enquiry_tab'] );      	// Remove the description tab
+//     unset( $tabs['reviews'] ); 			// Remove the reviews tab
+// //     unset( $tabs['additional_information'] );  	// Remove the additional information tab
+
+    return $tabs;
+}
 
 /*
+ * 
+ * <li class="wcfm_enquiry_tab_tab" id="tab-title-wcfm_enquiry_tab" role="tab" aria-controls="tab-wcfm_enquiry_tab">
  *  register custom functions that are not related to the framework but necessary for the theme to run
  */
 

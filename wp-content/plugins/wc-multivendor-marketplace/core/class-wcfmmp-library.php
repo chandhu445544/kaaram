@@ -222,6 +222,10 @@ class WCFMmp_Library {
 	  	$scheme  = is_ssl() ? 'https' : 'http';
 	  	wp_enqueue_script( 'wcfm-store-google-maps', apply_filters( 'wcfm_google_map_api_url', $scheme . '://maps.googleapis.com/maps/api/js?key=' . $api_key . '&libraries=places', $api_key ) );
 	  	wp_localize_script( 'wcfm-store-google-maps', 'wcfm_maps', array( 'lib' => 'google' ) );
+	  	
+	  	if( apply_filters( 'wcfmmp_is_allow_map_pointer_cluster', true ) ) {
+	  		wp_enqueue_script( 'wcfm-store-google-maps-cluster', 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js', array('jquery' ), $WCFMmp->version, true );
+	  	}
 	  }
 	}
   

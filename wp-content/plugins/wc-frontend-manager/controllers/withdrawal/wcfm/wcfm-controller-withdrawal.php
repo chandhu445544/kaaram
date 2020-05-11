@@ -121,6 +121,9 @@ class WCFM_Withdrawal_Controller {
 				// Payment
 				$wcfm_withdrawals_json_arr[$index][] = wc_price( (float) $wcfm_withdrawals_single->total_commission - (float) $wcfm_withdrawals_single->withdraw_charges );  
 				
+				// Additional Info
+				$wcfm_withdrawals_json_arr[$index][] = apply_filters( 'wcfm_withdrawal_additonal_data', '&ndash;', $wcfm_withdrawals_single->ID, $wcfm_withdrawals_single->order_id, $wcfm_withdrawals_single->vendor_id );
+				
 				// Date
 				$wcfm_withdrawals_json_arr[$index][] = apply_filters( 'wcfm_commission_date_display', date_i18n( wc_date_format() . ' ' . wc_time_format(), strtotime( $wcfm_withdrawals_single->created ) ), $order_id, $wcfm_withdrawals_single );
 				

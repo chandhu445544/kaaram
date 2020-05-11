@@ -16,6 +16,7 @@ jQuery(document).ready(function($) {
 										{ responsivePriority: 1 },
 										{ responsivePriority: 2 },
 										{ responsivePriority: 1 },
+										{ responsivePriority: 3 },
 										{ responsivePriority: 4 }
 								],
 		"columnDefs": [ { "targets": 0, "orderable" : false }, 
@@ -25,6 +26,7 @@ jQuery(document).ready(function($) {
 										{ "targets": 4, "orderable" : false },
 										{ "targets": 5, "orderable" : false },
 										{ "targets": 6, "orderable" : false },
+										{ "targets": 7, "orderable" : false },
 									],
 		'ajax': {
 			"type"   : "POST",
@@ -104,8 +106,8 @@ jQuery(document).ready(function($) {
 	
 	// Screen Manager
 	$( document.body ).on( 'updated_wcfm-withdrawal', function() {
-		//$.each(wcfm_orders_screen_manage, function( column, column_val ) {
-		  $wcfm_withdrawal_table.column(2).visible( false );
-		//} );
+		$.each(wcfm_withdrawal_screen_manage, function( column, column_val ) {
+		  $wcfm_withdrawal_table.column(column).visible( false );
+		} );
 	});
 } );

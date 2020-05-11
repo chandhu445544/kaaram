@@ -651,10 +651,10 @@ class WCFM_Enquiry {
  		if( !is_user_logged_in() && apply_filters( 'wcfm_is_allow_enquiry_with_login', false ) ) {
  			$WCFM->library->load_wcfm_login_popup_lib();
  		} else {
-			wp_enqueue_script( 'wcfm_enquiry_tab_js', $WCFM->library->js_lib_url_min . 'enquiry/wcfm-script-enquiry-tab.js', array('jquery' ), $WCFM->version, true );
+			//wp_enqueue_script( 'wcfm_enquiry_tab_js', $WCFM->library->js_lib_url_min . 'enquiry/wcfm-script-enquiry-tab.js', array('jquery' ), $WCFM->version, true );
 			// Localized Script
-			$wcfm_messages = get_wcfm_enquiry_manage_messages();
-			wp_localize_script( 'wcfm_enquiry_tab_js', 'wcfm_enquiry_manage_messages', $wcfm_messages );
+			//$wcfm_messages = get_wcfm_enquiry_manage_messages();
+			//wp_localize_script( 'wcfm_enquiry_tab_js', 'wcfm_enquiry_manage_messages', $wcfm_messages );
 		}
  		
  		if( is_account_page() ) {
@@ -686,10 +686,10 @@ class WCFM_Enquiry {
  			wp_enqueue_style( 'wcfm_enquiry_tab_css',  $WCFM->library->css_lib_url_min . 'enquiry/wcfm-style-enquiry-tab.css', array(), $WCFM->version );
  		}
  		
- 		wp_enqueue_style( 'wcfm_enquiry_button_css',  $WCFM->library->css_lib_url_min . 'enquiry/wcfm-style-enquiry-button.css', array(), $WCFM->version );
+ 		//wp_enqueue_style( 'wcfm_enquiry_button_css',  $WCFM->library->css_lib_url_min . 'enquiry/wcfm-style-enquiry-button.css', array(), $WCFM->version );
  		
  		if( is_rtl() ) {
- 			wp_enqueue_style( 'wcfm_enquiry_button_rtl_css',  $WCFM->library->css_lib_url_min . 'enquiry/wcfm-style-enquiry-button-rtl.css', array( 'wcfm_enquiry_button_css' ), $WCFM->version );
+ 			wp_enqueue_style( 'wcfm_enquiry_button_rtl_css',  $WCFM->library->css_lib_url_min . 'enquiry/wcfm-style-enquiry-button-rtl.css', array( 'wcfm_core_css' ), $WCFM->version );
  		}
  		
  		if( is_account_page() ) {

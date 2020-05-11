@@ -178,6 +178,10 @@ class WCFM_Enquiry_Manage_Controller {
 									}
 								}
 							}
+							
+							// Vendor Transient Clear
+							$cache_key = 'wcfm-notification-enquiry-' . $inquiry_vendor_id;
+							delete_transient( $cache_key );
 						}
 					}
 					
@@ -195,6 +199,10 @@ class WCFM_Enquiry_Manage_Controller {
 						$WCFM->wcfm_notification->wcfm_send_direct_message( $inquiry_vendor_id, 0, 0, 1, $wcfm_messages, 'enquiry', false );
 					}
 				}
+				
+				// Admin Transient Clear
+				$cache_key = 'wcfm-notification-enquiry-0';
+				delete_transient( $cache_key );
 			}
 			
 			if( defined('WCFM_REST_API_CALL') ) {

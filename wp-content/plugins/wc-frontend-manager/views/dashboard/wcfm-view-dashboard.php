@@ -108,7 +108,7 @@ $admin_fee_mode = apply_filters( 'wcfm_is_admin_fee_mode', false );
 		
 		<?php if( apply_filters( 'wcfm_is_pref_stats_box', true ) ) { ?>
 			<div class="wcfm_dashboard_stats">
-				<?php if ( apply_filters( 'wcfm_is_allow_reports', true ) && current_user_can( 'view_woocommerce_reports' ) && ( $report_data_block ) ) { ?>
+				<?php if ( apply_filters( 'wcfm_is_allow_reports', true ) && apply_filters( 'wcfm_sales_report_is_allow_gross_sales', true ) && apply_filters( 'wcfm_is_allow_stats_block_gross_sales', true ) && current_user_can( 'view_woocommerce_reports' ) && ( $report_data_block ) ) { ?>
 					<div class="wcfm_dashboard_stats_block">
 						<a href="<?php echo get_wcfm_reports_url( 'month' ); ?>">
 							<span class="wcfmfa fa-currency"><?php echo get_woocommerce_currency_symbol() ; ?></span>
@@ -142,28 +142,32 @@ $admin_fee_mode = apply_filters( 'wcfm_is_admin_fee_mode', false );
 						$commission = $grose_sell - $commission;
 					}
 				?>
-					<div class="wcfm_dashboard_stats_block">
-						<a href="<?php echo get_wcfm_reports_url( ); ?>">
-							<span class="wcfmfa fa-money fa-money-bill-alt"></span>
-							<div>
-								<strong><?php echo wc_price( $commission ); ?></strong><br />
-								<?php if( $admin_fee_mode ) { _e( 'admin fees in last 7 days', 'wc-frontend-manager' ); } else { _e( 'commission in last 7 days', 'wc-frontend-manager' ); } ?>
-							</div>
-						</a>
-					</div>
-					<div class="wcfm_dashboard_stats_block">
-						<a href="<?php echo apply_filters( 'sales_by_product_report_url', get_wcfm_reports_url( ), '' ); ?>">
-							<span class="wcfmfa fa-cube"></span>
-							<div>
-								<?php printf( _n( "<strong>%s item</strong>", "<strong>%s items</strong>", $report_data_block->total_items, 'wc-frontend-manager' ), $report_data_block->total_items ); ?>
-								<br /><?php _e( 'sold in last 7 days', 'wc-frontend-manager' ); ?>
-							</div>
-						</a>
-					</div>
+					<?php if( apply_filters( 'wcfm_is_allow_view_commission', true ) && apply_filters( 'wcfm_is_allow_stats_block_commission', true ) ) { ?>
+						<div class="wcfm_dashboard_stats_block">
+							<a href="<?php echo get_wcfm_reports_url( ); ?>">
+								<span class="wcfmfa fa-money fa-money-bill-alt"></span>
+								<div>
+									<strong><?php echo wc_price( $commission ); ?></strong><br />
+									<?php if( $admin_fee_mode ) { _e( 'admin fees in last 7 days', 'wc-frontend-manager' ); } else { _e( 'commission in last 7 days', 'wc-frontend-manager' ); } ?>
+								</div>
+							</a>
+						</div>
+					<?php } ?>
+					<?php if( apply_filters( 'wcfm_is_allow_stats_block_sold_item', true ) ) { ?>
+						<div class="wcfm_dashboard_stats_block">
+							<a href="<?php echo apply_filters( 'sales_by_product_report_url', get_wcfm_reports_url( ), '' ); ?>">
+								<span class="wcfmfa fa-cube"></span>
+								<div>
+									<?php printf( _n( "<strong>%s item</strong>", "<strong>%s items</strong>", $report_data_block->total_items, 'wc-frontend-manager' ), $report_data_block->total_items ); ?>
+									<br /><?php _e( 'sold in last 7 days', 'wc-frontend-manager' ); ?>
+								</div>
+							</a>
+						</div>
+					<?php } ?>
 				<?php
 				}
 				?>
-				<?php if ( apply_filters( 'wcfm_is_allow_orders', true ) && current_user_can( 'edit_shop_orders' ) ) { ?>
+				<?php if ( apply_filters( 'wcfm_is_allow_orders', true ) && apply_filters( 'wcfm_is_allow_stats_block_orders', true ) && current_user_can( 'edit_shop_orders' ) ) { ?>
 					<div class="wcfm_dashboard_stats_block">
 						<a href="<?php echo get_wcfm_orders_url( ); ?>">
 							<span class="wcfmfa fa-cart-plus"></span>

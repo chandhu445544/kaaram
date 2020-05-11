@@ -398,6 +398,20 @@ jQuery(document).ready( function($) {
 		}).change();
 	}
 	
+	// Delivery Times
+	if( $("#wcfm_delivery_time_off_days").length > 0 ) {
+		$("#wcfm_delivery_time_off_days").select2();
+		
+		$("#wcfm_delivery_time_off_days").change(function() {
+			$('.wcfm_delivery_time_fields').removeClass('wcfm_ele_hide');
+			if( $(this).val() ) {
+				$.each($(this).val(), function( $i, $off_days ) {
+					$('.wcfm_delivery_time_fields_'+$off_days).addClass('wcfm_ele_hide');	
+				});
+			}
+		}).change();
+	}
+	
 	function GetURLParameterSetup(sParam) {
 		var sPageURL = window.location.search.substring(1);
 		var sURLVariables = sPageURL.split('&');

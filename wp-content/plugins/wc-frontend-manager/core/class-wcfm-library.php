@@ -163,7 +163,7 @@ class WCFM_Library {
 			  wp_localize_script( 'wcfm_products_manage_js', 'wcfm_products_manage_messages', $wcfm_messages );
 			  $wcfm_product_type_categories = get_option( 'wcfm_product_type_categories', array() );
 			  wp_localize_script( 'wcfm_products_manage_js', 'wcfm_product_type_categories', $wcfm_product_type_categories );
-			  $wcfm_product_type_default_tab = apply_filters( 'wcfm_product_type_default_tab', array( 'simple' => 'wcfm_products_manage_form_inventory_head', 'variable' => 'wcfm_products_manage_form_inventory_head', 'external' => 'wcfm_products_manage_form_inventory_head', 'grouped' => 'wcfm_products_manage_form_grouped_head', 'booking' => 'wcfm_products_manage_form_booking_options_head', 'accommodation-booking' => 'wcfm_products_manage_form_accommodation_options_head', 'auction' => 'wcfm_products_manage_form_auction_head', 'redq_rental' => 'wcfm_products_manage_form_inventory_head', 'rental' => 'wcfm_products_manage_form_redq_rental_head', 'appointment' => 'wcfm_products_manage_form_appointment_options_head', 'bundle' => 'wcfm_products_manage_form_wc_product_bundle_head', 'lottery' => 'wcfm_products_manage_form_lottery_head', 'groupbuy' => 'wcfm_products_manage_form_groupbuy_head', 'composite' => 'wcfm_products_manage_form_wc_product_composite_head' ) );
+			  $wcfm_product_type_default_tab = apply_filters( 'wcfm_product_type_default_tab', array( 'simple' => 'wcfm_products_manage_form_inventory_head', 'variable' => 'wcfm_products_manage_form_variations_head', 'external' => 'wcfm_products_manage_form_inventory_head', 'grouped' => 'wcfm_products_manage_form_grouped_head', 'booking' => 'wcfm_products_manage_form_booking_options_head', 'accommodation-booking' => 'wcfm_products_manage_form_accommodation_options_head', 'auction' => 'wcfm_products_manage_form_auction_head', 'redq_rental' => 'wcfm_products_manage_form_inventory_head', 'rental' => 'wcfm_products_manage_form_redq_rental_head', 'appointment' => 'wcfm_products_manage_form_appointment_options_head', 'bundle' => 'wcfm_products_manage_form_wc_product_bundle_head', 'lottery' => 'wcfm_products_manage_form_lottery_head', 'groupbuy' => 'wcfm_products_manage_form_groupbuy_head', 'composite' => 'wcfm_products_manage_form_wc_product_composite_head' ) );
 			  wp_localize_script( 'wcfm_products_manage_js', 'wcfm_product_type_default_tab', $wcfm_product_type_default_tab );
 			  
 			  // Single Product Multi-seller support - 3.3.7
@@ -275,7 +275,7 @@ class WCFM_Library {
 	    	$wcfm_screen_manager_hidden_data    = apply_filters( 'wcfm_screen_manager_hidden_columns', $wcfm_screen_manager_hidden_data );
 	    	wp_localize_script( 'wcfm_orders_js', 'wcfm_orders_screen_manage_hidden', $wcfm_screen_manager_hidden_data );
 	    	
-	    	wp_localize_script( 'wcfm_orders_js', 'wcfm_orders_auto_refresher', array( 'is_allow' => apply_filters( 'wcfm_orders_is_allow_auto_refresher', false ) ) );
+	    	wp_localize_script( 'wcfm_orders_js', 'wcfm_orders_auto_refresher', array( 'is_allow' => apply_filters( 'wcfm_orders_is_allow_auto_refresher', false ), 'duration' => apply_filters( 'wcfm_order_auto_refresher_duration', 60000 ) ) );
       break;
       
       case 'wcfm-orders-details':

@@ -19,6 +19,7 @@ jQuery(document).ready(function($) {
 										{ responsivePriority: 5 },
 										{ responsivePriority: 4 },
 										{ responsivePriority: 1 },
+										{ responsivePriority: 3 },
 										{ responsivePriority: 6 },
 										{ responsivePriority: 5 }
 								],
@@ -30,6 +31,7 @@ jQuery(document).ready(function($) {
 										{ "targets": 5, "orderable" : false },
 										{ "targets": 6, "orderable" : false },
 										{ "targets": 7, "orderable" : false },
+										{ "targets": 8, "orderable" : false },
 									],
 		'ajax': {
 			"type"   : "POST",
@@ -109,4 +111,11 @@ jQuery(document).ready(function($) {
 		$('.dataTable').before( $('.wcfm_filters_wrap') );
 		$('.wcfm_filters_wrap').css( 'display', 'inline-block' );
 	}
+	
+	// Screen Manager
+	$( document.body ).on( 'updated_wcfm-reverse-withdrawal-requests', function() {
+		$.each(wcfm_withdrawal_reverse_screen_manage, function( column, column_val ) {
+		  $wcfm_reverse_withdrawal_requests_table.column(column).visible( false );
+		} );
+	});
 } );

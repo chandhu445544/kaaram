@@ -110,7 +110,14 @@ $request_mode = apply_filters( 'wcfm_refund_request_default_mode', 'partial' );
 					<?php if( !empty( $product_items ) ) { ?>
 						<?php foreach( $product_items as $item_id => $product_item ) { ?>
 							<tr class="order_line_item_<?php echo $item_id; ?>">
-								<td class="item sortable" data-sort="string-ins"><?php echo $product_item['name']; ?></td>
+								<td class="item sortable" data-sort="string-ins">
+								  <?php 
+								  echo $product_item['name']; 
+								  do_action( 'woocommerce_order_item_meta_start', $item_id, new WC_Order_Item_Product( $item_id ), $order, false );
+									wc_display_item_meta( $item );
+									do_action( 'woocommerce_order_item_meta_end', $item_id, new WC_Order_Item_Product( $item_id ), $order, false );
+								  ?>
+								</td>
 								
 								<td class="item_cost sortable no_mob" data-sort="float" style="text-align:center;"><?php echo wc_price( $product_item['cost'], array( 'currency' => $currency ) ); ?></td>
 								

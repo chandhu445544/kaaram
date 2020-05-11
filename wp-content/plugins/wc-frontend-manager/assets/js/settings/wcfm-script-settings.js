@@ -192,6 +192,20 @@ jQuery(document).ready( function($) {
 		}).change();
 	}
 	
+	// Delivery Times
+	if( $("#wcfm_default_delivery_time_off_days").length > 0 ) {
+		$("#wcfm_default_delivery_time_off_days").select2();
+		
+		$("#wcfm_default_delivery_time_off_days").change(function() {
+			$('.wcfm_delivery_time_fields').removeClass('wcfm_ele_hide');
+			if( $(this).val() ) {
+				$.each($(this).val(), function( $i, $off_days ) {
+					$('.wcfm_delivery_time_fields_'+$off_days).addClass('wcfm_ele_hide');	
+				});
+			}
+		}).change();
+	}
+	
 	// Live Chat
 	if( $("#wcfm_chatbox_setting_lib").length > 0 ) {
 		$("#wcfm_chatbox_setting_lib").change(function() {

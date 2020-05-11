@@ -74,6 +74,9 @@ class wcfm_Notice_Manage_Controller {
 					$wcfm_messages = sprintf( __( 'A new announcement submitted. <a target="_blank" class="wcfm_dashboard_item_title" href="%s">%s</a>', 'wc-frontend-manager' ), get_wcfm_notice_view_url( $new_notice_id ), $wcfm_notice_manager_form_data['title'] );
 					
 					$WCFM->wcfm_notification->wcfm_send_direct_message( $author_id, $message_to, $author_is_admin, $author_is_vendor, $wcfm_messages, 'notice' );
+					
+					$cache_key = 'wcfm-notification-notice';
+					delete_transient( $cache_key );
 				}
 				
 				echo '{"status": true, "message": "' . $wcfm_notice_messages['notice_saved'] . '", "redirect": "' . get_wcfm_notice_view_url( $new_notice_id ) . '"}';

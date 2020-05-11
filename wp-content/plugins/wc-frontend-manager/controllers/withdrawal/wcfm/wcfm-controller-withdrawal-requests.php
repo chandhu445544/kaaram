@@ -165,6 +165,9 @@ class WCFM_Withdrawal_Requests_Controller {
 				// Commission IDs
 				$wcfm_withdrawal_requests_json_arr[$index][] =  '<span class="wcfm_dashboard_item_title transaction_commission_ids">#'.  $wcfm_withdrawal_request_single->commission_ids . '</span>';
 				
+				// Additional Info
+				$wcfm_withdrawal_requests_json_arr[$index][] = apply_filters( 'wcfm_withdrawal_request_additonal_data', '&ndash;', $wcfm_withdrawal_request_single->ID, $wcfm_withdrawal_request_single->order_ids, $wcfm_withdrawal_request_single->commission_ids, $wcfm_withdrawal_request_single->vendor_id );
+				
 				// Note
 				if( $wcfm_withdrawal_request_single->withdraw_note ) {
 					$wcfm_withdrawal_requests_json_arr[$index][] = $wcfm_withdrawal_request_single->withdraw_note;

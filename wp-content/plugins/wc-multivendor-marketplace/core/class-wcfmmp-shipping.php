@@ -564,7 +564,7 @@ class WCFMmp_Shipping {
 						$id = explode(":", $rate_id, 2);
 						$id = $id[0];
 						if($id === 'free_shipping') {
-							$free_shipping_available = apply_filters( 'wcfm_is_allow_hide_other_shipping_if_free', false );
+							$free_shipping_available = apply_filters( 'wcfm_is_allow_hide_other_shipping_if_free', true );
 						}
 						$wcfmmp_shipping[ $rate_id ] = $rate;  
 					}
@@ -574,7 +574,7 @@ class WCFMmp_Shipping {
 					foreach ( $wcfmmp_shipping as $rate_id => $rate ) { 
 						$id = explode(":", $rate_id, 2);
 						$id = $id[0];
-						if($id !== 'free_shipping') {
+						if( !in_array( $id, array( 'free_shipping', 'local_pickup' ) ) ) {
 							unset($wcfmmp_shipping[$rate_id]);
 						}
 					}

@@ -100,6 +100,9 @@ if (!class_exists('WCFMmp_Email_Store_New_Order')) :
 						$this->find[]       = '{order_number}';
 						$this->replace[]    = $this->order->get_order_number();
 						
+						$this->find[]       = '{store_name}';
+						$this->replace[]    = wcfm_get_vendor_store_name( $vendor_id );
+						
 						$this->vendor_id    = $vendor_id;
 						$this->recipient    = $vendor_email;
 						$this->vendor_email = $vendor_email;
@@ -115,6 +118,8 @@ if (!class_exists('WCFMmp_Email_Store_New_Order')) :
 					
 					// Filter to add Group Managers in CC
 					$headers = apply_filters( 'wcfmmp_store_new_order_email_header', $headers, $vendor_id );
+					
+					$subject = apply_filters( 'wcfmmp_store_new_order_email_subject', $this->get_subject(), $vendor_id );
 
 					$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $headers, $this->get_attachments() );
 				}

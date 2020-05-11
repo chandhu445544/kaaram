@@ -1046,6 +1046,10 @@ class WCFM_Integrations_Products_Manage_Controller {
 		if(isset($wcfm_products_manage_form_data['_unit_regular_price_per_unit_mult'])) {
 			update_post_meta( $new_product_id, '_unit_regular_price_per_unit_mult', $wcfm_products_manage_form_data['_unit_regular_price_per_unit_mult'] );
 		}
+		
+		if(isset($wcfm_products_manage_form_data['_age_rating_age'])) {
+			update_post_meta( $new_product_id, '_age_rating_age', $wcfm_products_manage_form_data['_age_rating_age'] );
+		}
 	}
 	
 	/**
@@ -1072,6 +1076,10 @@ class WCFM_Integrations_Products_Manage_Controller {
 		
 		if ( isset( $variations['_gm_gtin'] ) ) {
 			update_post_meta( $variation_id, '_gm_gtin', $variations['_gm_gtin'] );
+		}
+		
+		if(isset($variations['_age_rating_age'])) {
+			//update_post_meta( $variation_id, '_age_rating_age', $variations['_age_rating_age'] );
 		}
 		
 		return $wcfm_variation_data;

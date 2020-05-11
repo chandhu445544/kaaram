@@ -1,0 +1,240 @@
+<!-- start Simple Custom CSS and JS -->
+<style type="text/css">
+/* Theme colors 
+
+	#000000 -- black 
+	#ff6d19 -- orange 
+	#ffff -- white
+	#35363a -- grey
+
+*/
+
+#top .woocommerce-tabs h2 { display: none; }
+
+/* Font size start */
+#top .price span{ font-size: 20px !important; }
+#top del, #top ins { font-size: 15px !important; }
+
+#commentform label {
+    position: absolute;
+    left: 245px;
+    font-size: 15px !important;
+    top: 0;
+    font-weight: bold;
+}
+/* Font size end */
+
+/* Product page tab edit start*/
+#wcfmmp-stores-lists{box-shadow:none!important;}
+#wcfmmp_store_orderby{box-shadow:none!important;}
+
+
+#wcfmmp-stores-wrap ul.wcfmmp-store-wrap li .store-wrapper{box-shadow:none!important;}
+#wcfmmp-stores-wrap ul.wcfmmp-store-wrap li.no-banner-img .store-content .store-info .featured-favourite .featured-label{box-shadow:none!important;}
+.wcfmmp-store-search-form {
+  box-shadow:none!important;
+  
+}
+
+a.wcfm_product_multivendor, .wcfmmp_product_mulvendor_container a.wcfmmp_product_multivendor_action_button {
+    /*background: #17a2b8;*/
+    padding: 5px 10px;
+   /* -moz-border-radius: 4px;
+    -webkit-border-radius: 5px;*/
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid #ff6d19;
+   /* color: #ffffff;
+    float: left;*/
+    text-align: center;
+    text-decoration: none;
+    /* margin-bottom: 8px;
+    margin-top: 10px;
+    -webkit-box-shadow: 0 1px 0 #ccc; */
+    box-shadow: none!important;
+    display: block;
+    cursor: pointer;
+}
+/* Product page tab edit end */
+
+/* Background color edit start */
+div.wcfmmp_product_mulvendor_rowhead {
+  box-shadow: none!important;
+}
+#tab-wcfm_product_multivendor_tab .wcfmmp_product_mulvendor_rowhead{
+	background-color:#000000;
+}
+#tab-wcfm_product_multivendor_tab .wcfmmp_product_mulvendor_rowbody{
+	background-color:#000000;
+}
+div.wcfmmp_product_mulvendor_row.wcfmmp_product_mulvendor_rowhead div.wcfmmp_product_mulvendor_rowsub {
+    color: #ffffff!important;
+}
+  
+/* Background color edit end */
+
+/* Meta data edit start */
+.template-shop .product_meta { display: none !important; }
+/* Meta data edit end */
+
+/*Map edit start */
+.wcfmmp-store-search-form i.wcfmmmp_locate_icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    margin-top: -22px !important;
+    cursor: pointer;
+    background-size: contain;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #ff6d19;
+    color: white;
+}
+
+.wcfmmp-stores-listing .wcfmmp-store-list-map {
+  width: 100% !important;
+  padding-top: 50px !important;
+  margin: 0 auto;
+}
+
+/* Map edit end */
+
+/* Shop By Store search edit start */
+.select2-container--default .select2-selection--single {
+    background-color: #000000 !important;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+  
+}
+
+.wcfmmp-store-search-form input.wcfmmp-radius-addr, .wcfmmp-store-search-form input.wcfm-search-field, .wcfmmp-store-search-form input#search, .wcfmmp-store-search-form select#wcfmmp_store_category, .wcfmmp-store-search-form select#wcfmmp_store_country, .wcfmmp-store-search-form #wcfmmp_store_state, .wcfmmp-store-search-form .select2-container, .wcfmmp-store-search-form .wcfmmp-search-box, #wcfmmp_store_orderby {
+    /*padding: 8px 10px;
+    width: 23%;
+    margin-left: 0;
+    margin-right: 10px;
+    font-size: 15px;
+    display: inline-block;
+    box-shadow: none; */
+    background-color: #000000!important;
+    border: 1px solid #ccc!important;
+    box-shadow: none;
+    /*-moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;*/
+    min-height: 38px;
+}
+
+  .select2-dropdown {
+    background-color: #000000 !important;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    left: -100000px;
+    width: 100%;
+    z-index: 1051;
+
+}
+
+
+/* My Account form edit start */
+.woocommerce-page .button {
+    min-width: 110px;
+    padding: 15px;
+    line-height: 1em;
+    margin: 4px 2px 0 0;
+    float: right !important;
+    font-size: 15px;
+    width: auto;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    border-radius: 2px;
+}
+/* My Account form edit end */
+
+/* Membership form edit start */
+.wcfm-membership-wrapper {
+    padding: 20px;
+    background: #000000;
+    box-shadow: none !important;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    width: 90%;
+    margin: 25px auto;
+}
+
+.woocommerce .login .lost_password {
+    margin: initial;
+    position: inherit !important;
+    top: -1em;
+    left: 5px;
+    font-size: 0.92em;
+}
+
+#top label span, #top legend span {
+    font-weight: normal;
+    font-size: 13px;
+    color: #ff6d19 !important;
+}
+
+#wcfm_membership_container input[type="text"], #wcfm_membership_container input[type="file"], #wcfm_membership_container input[type="password"], #wcfm_membership_container select, #wcfm_membership_container input[type="number"], #wcfm_membership_container input[type="time"], #wcfm_membership_container input[type="search"], #wcfm_membership_container textarea {
+    background-color: #000000!important;
+    border: 1px solid #35363a!important;
+    box-shadow: none!important;
+
+}
+
+.wcfm_membership_subscribe_button_wrapper input.wcfm_submit_button, #wcfm_membership_container input.wcfm_submit_button, #wcfm_membership_container a.wcfm_submit_button {
+    background-color: #ff6d19;
+}
+
+#wcfm_membership_container input.wcfm_submit_button, #wcfm_membership_container a.wcfm_submit_button {
+    float: right;
+    margin-top: 10px;
+    margin-left: 10px;
+    background: #ff6d19 none repeat scroll 0 0;
+    border-bottom: none!important;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: .046875em;
+    line-height: 1;
+    padding: .84375em .875em 0.78125em!important;
+    -webkit-box-shadow: 0 1px 0 #ccc;
+    box-shadow: none!important;
+    text-transform: uppercase;
+}
+
+/* Membership form edit end */
+
+/* Page numbers edit start */
+.pagination .current {
+    font-size: 20px;
+    padding: 1px 9px 1px 9px;
+    font-weight: bold;
+}
+
+.pagination span, .pagination a {
+    display: block;
+    float: left;
+    font-size: 20px;
+    line-height: 13px;
+    padding: 2px 9px 1px 9px;
+    text-decoration: none;
+    width: auto;
+}
+
+/* Page numbers edit end */
+</style>
+<!-- end Simple Custom CSS and JS -->

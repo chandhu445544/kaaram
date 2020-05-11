@@ -88,6 +88,8 @@ class WCFMmp_Frontend {
 		if( !$is_look_hook_defined ) {
 			if( $vendor_sold_by_position == 'bellow_title' ) {
 				add_action('woocommerce_after_shop_loop_item_title', array( $this, 'wcfmmp_sold_by_product' ), 9 );
+			} else if( $vendor_sold_by_position == 'bellow_atc' ) {
+				add_action('woocommerce_after_shop_loop_item', array( $this, 'wcfmmp_sold_by_product' ), 50 );
 			} else {
 				add_action('woocommerce_after_shop_loop_item_title', array( $this, 'wcfmmp_sold_by_product' ), 50 );
 			}
@@ -282,11 +284,17 @@ class WCFMmp_Frontend {
 		$checkout_user_location   = isset( $wcfm_marketplace_options['checkout_user_location'] ) ? $wcfm_marketplace_options['checkout_user_location'] : 'no';
 		if( $checkout_user_location == 'yes' ) $is_allow = true;
 		
-		$wcfm_shipping_options = get_option( 'wcfm_shipping_options', array() );
-		$wcfmmp_store_shipping_enabled = isset( $wcfm_shipping_options['enable_store_shipping'] ) ? $wcfm_shipping_options['enable_store_shipping'] : 'yes';
-		$wcfmmp_marketplace_shipping_by_distance_options = get_option( 'woocommerce_wcfmmp_product_shipping_by_distance_settings', array() );
-    $wcfmmp_marketplace_shipping_by_distance_enabled = ( !empty($wcfmmp_marketplace_shipping_by_distance_options) && !empty($wcfmmp_marketplace_shipping_by_distance_options['enabled']) ) ? $wcfmmp_marketplace_shipping_by_distance_options['enabled'] : 'no';
-    if( ( $wcfmmp_store_shipping_enabled == 'yes' ) && ( $wcfmmp_marketplace_shipping_by_distance_enabled == 'yes' ) ) $is_allow = true;
+		if( !$is_allow ) {
+			$wcfm_shipping_options = get_option( 'wcfm_shipping_options', array() );
+			$wcfmmp_store_shipping_enabled = isset( $wcfm_shipping_options['enable_store_shipping'] ) ? $wcfm_shipping_options['enable_store_shipping'] : 'yes';
+			$wcfmmp_marketplace_shipping_by_distance_options = get_option( 'woocommerce_wcfmmp_product_shipping_by_distance_settings', array() );
+			$wcfmmp_marketplace_shipping_by_distance_enabled = ( !empty($wcfmmp_marketplace_shipping_by_distance_options) && !empty($wcfmmp_marketplace_shipping_by_distance_options['enabled']) ) ? $wcfmmp_marketplace_shipping_by_distance_options['enabled'] : 'no';
+			if( ( $wcfmmp_store_shipping_enabled == 'yes' ) && ( $wcfmmp_marketplace_shipping_by_distance_enabled == 'yes' ) ) $is_allow = true;
+			
+			if( $is_allow ) {
+				
+			}
+		}
 		
 		return $is_allow;
 	}
@@ -295,7 +303,7 @@ class WCFMmp_Frontend {
 	 * Checkout User Location Field
 	 */
 	function wcfmmp_checkout_user_location_fields( $fields ) {
-		if( apply_filters( 'wcfmmp_is_allow_checkout_user_location', true ) ) {
+		if( ( true === WC()->cart->needs_shipping_address() ) && apply_filters( 'wcfmmp_is_allow_checkout_user_location', true ) ) {
 			$fields['billing']['wcfmmp_user_location'] = array(
 					'label'     => __( 'Delivery Location', 'wc-multivendor-marketplace' ),
 					'placeholder'   => _x( 'Insert your address ..', 'placeholder', 'wc-multivendor-marketplace' ),
@@ -324,7 +332,7 @@ class WCFMmp_Frontend {
 	 */
 	function wcfmmp_checkout_user_location_map( $checkout ) {
 		global $WCFM, $WCFMmp;
-		if( apply_filters( 'wcfmmp_is_allow_checkout_user_location', true ) ) {
+		if( ( true === WC()->cart->needs_shipping_address() ) && apply_filters( 'wcfmmp_is_allow_checkout_user_location', true ) ) {
 			?>
 			<div class="woocommerce-billing-fields__field-wrapper">
 				<div class="wcfmmp-user-locaton-map" id="wcfmmp-user-locaton-map"></div>
@@ -640,7 +648,7 @@ class WCFMmp_Frontend {
 		
 		$commission_tax_fileds = apply_filters( 'wcfm_marketplace_settings_fields_membership_commission_tax', array(  
 			                                                                'tax_fields_heading' => array( 'type' => 'html', 'class' => 'commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'value' => '<h2>' . __('Commission Tax Settings', 'wc-multivendor-marketplace') . '</h2><div class="wcfm_clearfix"></div>' ), 
-																																			'tax_enable' => array( 'label' => __( 'Enable', 'wc-multivendor-marketplace' ), 'type' => 'checkbox', 'name' => 'commission[tax_enable]', 'class' => 'wcfm-checkbox wcfm_ele commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'label_class' => 'wcfm_title checkbox_title commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'value' => 'yes', 'dfvalue' => $tax_enable, 'desc_class' => 'wcfm_page_options_desc commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'desc' => __( 'Enable this to deduct tax from vendor\'s commission.', 'wc-multivendor-marketplace' ) ),
+																																			'tax_enable' => array( 'label' => __( 'Enable', 'wc-multivendor-marketplace' ), 'type' => 'checkbox', 'name' => 'commission[tax_enable]', 'class' => 'wcfm-checkbox wcfm_ele commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'label_class' => 'wcfm_title checkbox_title commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'value' => 'yes', 'dfvalue' => $tax_enable ),
 																																			'tax_name' => array( 'label' => __( 'Tax Label', 'wc-multivendor-marketplace' ), 'placeholder' => __( 'Tax', 'wc-multivendor-marketplace' ), 'type' => 'text', 'name' => 'commission[tax_name]', 'class' => 'wcfm-text wcfm_ele commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'label_class' => 'wcfm_title commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'value' => $tax_name ),
 																																			'tax_percent' => array( 'label' => __( 'Tax Percent (%)', 'wc-multivendor-marketplace' ), 'type' => 'number', 'name' => 'commission[tax_percent]', 'class' => 'wcfm-text wcfm_ele wcfm_non_negative_input commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'label_class' => 'wcfm_title commission_mode_field commission_mode_percent commission_mode_fixed commission_mode_percent_fixed commission_mode_by_sales commission_mode_by_products commission_mode_by_quantity', 'value' => $tax_percent ),
 																																			), $membership_id );
@@ -873,9 +881,7 @@ class WCFMmp_Frontend {
 			
 			wp_enqueue_script( 'wcfmmp_store_list_js', $WCFMmp->library->js_lib_url_min . 'store-lists/wcfmmp-script-store-lists.js', array('jquery' ), $WCFMmp->version, true );
 			wp_localize_script( 'wcfmmp_store_list_js', 'wcfmmp_store_list_messages', array( 'choose_category' => __( 'Choose Category', 'wc-multivendor-marketplace' ), 'choose_location' => __( 'Choose Location', 'wc-multivendor-marketplace' ), 'choose_state' => __( 'Choose State', 'wc-multivendor-marketplace' ) ) );
-			wp_localize_script( 'wcfmmp_store_list_js', 'wcfmmp_store_list_options', array( 'search_location' => __( 'Insert your address ..', 'wc-multivendor-marketplace' ), 'is_geolocate' => apply_filters( 'wcfmmp_is_allow_store_list_by_user_location', true ), 'max_radius' => apply_filters( 'wcfmmp_radius_filter_max_distance', $max_radius_to_search ), 'radius_unit' => ucfirst( $radius_unit ), 'start_radius' => apply_filters( 'wcfmmp_radius_filter_start_distance', 10 ), 'default_lat' => $default_lat, 'default_lng' => $default_lng, 'icon_width' => apply_filters( 'wcfmmp_map_icon_width', 50 ), 'icon_height' => apply_filters( 'wcfmmp_map_icon_height', 50 ), 'is_poi' => apply_filters( 'wcfmmp_is_allow_map_poi', true ), 'is_allow_scroll_zoom' => apply_filters( 'wcfmmp_is_allow_map_scroll_zoom', true ), 'is_rtl' => is_rtl() ) );
-			
-			//wp_enqueue_script( 'wcfmmp_store_list_cluster_js', 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclustererplus@4.0.1.min.js', array('jquery' ), $WCFMmp->version, true );
+			wp_localize_script( 'wcfmmp_store_list_js', 'wcfmmp_store_list_options', array( 'search_location' => __( 'Insert your address ..', 'wc-multivendor-marketplace' ), 'is_geolocate' => apply_filters( 'wcfmmp_is_allow_store_list_by_user_location', true ), 'max_radius' => apply_filters( 'wcfmmp_radius_filter_max_distance', $max_radius_to_search ), 'radius_unit' => ucfirst( $radius_unit ), 'start_radius' => apply_filters( 'wcfmmp_radius_filter_start_distance', 10 ), 'default_lat' => $default_lat, 'default_lng' => $default_lng, 'icon_width' => apply_filters( 'wcfmmp_map_icon_width', 50 ), 'icon_height' => apply_filters( 'wcfmmp_map_icon_height', 50 ), 'is_poi' => apply_filters( 'wcfmmp_is_allow_map_poi', true ), 'is_allow_scroll_zoom' => apply_filters( 'wcfmmp_is_allow_map_scroll_zoom', true ), 'is_cluster' => apply_filters( 'wcfmmp_is_allow_map_pointer_cluster', true ), 'cluster_image' => apply_filters( 'wcfmmp_is_cluster_image', 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' ), 'is_rtl' => is_rtl() ) );
 		}
 		
 		// Product List Geo Locate Filter 
@@ -896,7 +902,7 @@ class WCFMmp_Frontend {
 				
 				wp_enqueue_script( 'wcfmmp_product_list_js', $WCFMmp->library->js_lib_url_min . 'product-geolocate/wcfmmp-script-product-lists.js', array('jquery' ), $WCFMmp->version, true );
 				
-				wp_localize_script( 'wcfmmp_product_list_js', 'wcfmmp_product_list_options', array( 'search_location' => __( 'Insert your address ..', 'wc-multivendor-marketplace' ), 'is_geolocate' => apply_filters( 'wcfmmp_is_allow_store_list_by_user_location', true ), 'max_radius' => apply_filters( 'wcfmmp_radius_filter_max_distance', $max_radius_to_search ), 'radius_unit' => ucfirst( $radius_unit ), 'start_radius' => apply_filters( 'wcfmmp_radius_filter_start_distance', 10 ), 'default_lat' => $default_lat, 'default_lng' => $default_lng, 'icon_width' => apply_filters( 'wcfmmp_map_icon_width', 50 ), 'icon_height' => apply_filters( 'wcfmmp_map_icon_height', 50 ), 'is_poi' => apply_filters( 'wcfmmp_is_allow_map_poi', true ), 'is_allow_scroll_zoom' => apply_filters( 'wcfmmp_is_allow_map_scroll_zoom', true ), 'is_rtl' => is_rtl() ) );
+				wp_localize_script( 'wcfmmp_product_list_js', 'wcfmmp_product_list_options', array( 'search_location' => __( 'Insert your address ..', 'wc-multivendor-marketplace' ), 'is_geolocate' => apply_filters( 'wcfmmp_is_allow_store_list_by_user_location', true ), 'max_radius' => apply_filters( 'wcfmmp_radius_filter_max_distance', $max_radius_to_search ), 'radius_unit' => ucfirst( $radius_unit ), 'start_radius' => apply_filters( 'wcfmmp_radius_filter_start_distance', 10 ), 'default_lat' => $default_lat, 'default_lng' => $default_lng, 'icon_width' => apply_filters( 'wcfmmp_map_icon_width', 50 ), 'icon_height' => apply_filters( 'wcfmmp_map_icon_height', 50 ), 'is_poi' => apply_filters( 'wcfmmp_is_allow_map_poi', true ), 'is_allow_scroll_zoom' => apply_filters( 'wcfmmp_is_allow_map_scroll_zoom', true ), 'is_cluster' => apply_filters( 'wcfmmp_is_allow_map_pointer_cluster', true ), 'cluster_image' => apply_filters( 'wcfmmp_is_cluster_image', 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' ), 'is_rtl' => is_rtl() ) );
 			}
  	  }
 		

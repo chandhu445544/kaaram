@@ -5,9 +5,9 @@ Donate link: https://www.paypal.me/wclovers/25usd
 Requires at least: 4.4
 Tested up to: 5.4
 WC requires at least: 3.0
-WC tested up to: 4.0.0
+WC tested up to: 4.1.0
 Requires PHP: 5.6
-Stable tag: 3.3.10
+Stable tag: 3.3.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -244,10 +244,30 @@ NONE.
 
 == Changelog ==
 
+= 3.3.12 =
+*Updated - 08/05/2020
+
+* Fixed   - Plugin activation error issue resolved
+
+= 3.3.11 =
+*Updated - 08/05/2020
+
+* Enhance - WooCommerce 4.1 compatibility added
+* Enhance - Local Pickup shipping option vendor's address append with shipping label
+* Enhance - Delivery Time "Week Day Off" and "Daily basis time slots" compatibility added
+* Enhance - WooCommerce Bookings "Global Availability" vendor wise compatibility added (WCFM Ultimate required)
+* Enhance - Refund request popup item meta display option added
+* Enhance - If cart items shipping not required then "Delivery Location" auto-disable option added
+* Enhance - Google Map store location display "cluster" support added
+* Enhance - Checkout user location auto-detect option added
+* Enhance - Store List display improved
+* Tweak   - Admin mode commission setting "Commission on Tax" calculate on Admin's Fee, previously always calculate on vendor's earning 
+* Fixed   - Store list not showing when "sort by order" change issue resolved
+
 = 3.3.10 =
 *Updated - 30/04/2020
 
-* Feature - Delivery Time module support added - [WCFM Delivery addon required](https://wclovers.com/product/woocommerce-frontend-manager-delivery/) - [Documentation](https://docs.wclovers.com/delivery-time/)
+* Feature - Delivery Time module compatibility added - [WCFM Delivery addon required](https://wclovers.com/product/woocommerce-frontend-manager-delivery/) - [Documentation](https://docs.wclovers.com/delivery-time/)
 * Enhance - Multivendor Checkout disable option added (WCFM Admin Setting -> Order Setting)
 * Fixed   - Distance rate shipping vendor setting "cost field" not visible issue resolved
 
@@ -1367,7 +1387,16 @@ NONE.
 
 == Upgrade Notice ==
 
-= 3.3.10 =
-* Feature - Delivery Time module support added - [WCFM Delivery addon required](https://wclovers.com/product/woocommerce-frontend-manager-delivery/) - [Documentation](https://docs.wclovers.com/delivery-time/)
-* Enhance - Multivendor Checkout disable option added (WCFM Admin Setting -> Order Setting)
-* Fixed   - Distance rate shipping vendor setting "cost field" not visible issue resolved
+= 3.3.12 =
+* Enhance - WooCommerce 4.1 compatibility added
+* Enhance - Local Pickup shipping option vendor's address append with shipping label
+* Enhance - Delivery Time "Week Day Off" and "Daily basis time slots" compatibility added
+* Enhance - WooCommerce Bookings "Global Availability" vendor wise compatibility added (WCFM Ultimate required)
+* Enhance - Refund request popup item meta display option added
+* Enhance - If cart items shipping not required then "Delivery Location" auto-disable option added
+* Enhance - Google Map store location display "cluster" support added
+* Enhance - Checkout user location auto-detect option added
+* Enhance - Store List display improved
+* Tweak   - Admin mode commission setting "Commission on Tax" calculate on Admin's Fee, previously always calculate on vendor's earning 
+* Fixed   - Store list not showing when "sort by order" change issue resolved
+* Fixed   - Plugin activation error issue resolved

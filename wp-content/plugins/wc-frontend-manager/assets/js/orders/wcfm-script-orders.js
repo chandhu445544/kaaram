@@ -155,7 +155,7 @@ jQuery(document).ready(function($) {
 			orderTableRefrsherTime = setTimeout(function() {
 				$wcfm_orders_table.ajax.reload();
 				orderTableRefrsher();
-			}, 30000 );
+			}, wcfm_orders_auto_refresher.duration  );
 		}
 	}
 	orderTableRefrsher();

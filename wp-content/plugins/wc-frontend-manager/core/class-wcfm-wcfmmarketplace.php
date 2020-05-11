@@ -1121,11 +1121,11 @@ class WCFM_Marketplace {
 				
 			  <?php
 			}
-			if( $admin_fee_mode ) {
+			//if( $admin_fee_mode ) {
 				do_action( 'wcfm_vendor_order_details_before_admin_fee', $order_id, $this->vendor_id );
 				?>
 				<tr>
-					<th class="label" colspan="2" style="text-align:right; <?php echo $td_style; ?>"><?php _e( 'Total Fees', 'wc-frontend-manager' ); ?>:</th>
+					<th class="label" colspan="2" style="text-align:right; <?php echo $td_style; ?>"><?php _e( 'Admin Fee', 'wc-frontend-manager' ); ?>:</th>
 					<td class="total" style="text-align:center; <?php echo $td_style; ?>">
 						<div class="view">
 							<?php 
@@ -1139,7 +1139,7 @@ class WCFM_Marketplace {
 				</tr>
 				<?php
 				do_action( 'wcfm_vendor_order_details_after_admin_fee', $order_id, $this->vendor_id );
-			}
+			//}
 		}
   }
   

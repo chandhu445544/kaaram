@@ -379,6 +379,8 @@ do_action( 'before_wcfm_orders_details', $order_id );
 												if( apply_filters( 'wcfm_is_allow_order_data_after_shipping_address', false ) ) {
 													do_action( 'woocommerce_admin_order_data_after_shipping_address', $order );
 												}
+												
+												do_action( 'wcfm_order_details_after_shipping_address',  $order );
 												?>
 										</td>
 									<?php } ?>
@@ -386,6 +388,8 @@ do_action( 'before_wcfm_orders_details', $order_id );
 							</tbody>
 						</table>
 					<?php } ?>
+					
+					<?php do_action( 'wcfm_order_details_after_address',  $order ); ?>
 					
 					<?php
 					if( !wcfm_is_vendor() ) {
@@ -932,18 +936,33 @@ do_action( 'before_wcfm_orders_details', $order_id );
 						
 						<?php if( ( $marketplece = wcfm_is_marketplace() ) && !wcfm_is_vendor() && apply_filters( 'wcfm_is_allow_view_commission', true ) && apply_filters( 'wcfm_is_allow_commission_manage', true ) && !in_array( $current_order_status, array( 'failed', 'cancelled', 'refunded', 'request', 'proposal', 'proposal-sent', 'proposal-expired', 'proposal-rejected', 'proposal-canceled', 'proposal-accepted' ) ) ) { ?>
 						<tr>
-							<th class="label"><?php if( $admin_fee_mode = apply_filters( 'wcfm_is_admin_fee_mode', false ) ) { _e( 'Admin Fees', 'wc-frontend-manager' ); } else { _e( 'Vendor Commission', 'wc-frontend-manager' ); } ?>:</th>
+							<th class="label"><?php _e( 'Vendor(s) Earning', 'wc-frontend-manager' ); ?>:</th>
 							<td width="1%"></td>
 							<td class="total">
 								<div class="view">
 								  <?php 
 								  $commission = $WCFM->wcfm_vendor_support->wcfm_get_commission_by_order( $order->get_id() );
 									if( $commission ) {
+										echo  wc_price( $commission, array( 'currency' => $order->get_currency() ) );
+									} else {
+										echo  __( 'N/A', 'wc-frontend-manager' );
+									}
+								  ?>
+								 </div>
+							</td>
+						</tr>
+						<tr>
+							<th class="label"><?php _e( 'Admin Fee', 'wc-frontend-manager' ); ?>:</th>
+							<td width="1%"></td>
+							<td class="total">
+								<div class="view">
+								  <?php 
+									if( $commission ) {
 										$gross_sales  = (float) $order->get_total();
 										$total_refund = (float) $order->get_total_refunded();
-										if( $admin_fee_mode || ( $marketplece == 'dokan' ) ) {
+										//if( $admin_fee_mode || ( $marketplece == 'dokan' ) ) {
 											$commission = $gross_sales - $total_refund - $commission;
-										}
+										//}
 										echo  wc_price( $commission, array( 'currency' => $order->get_currency() ) );
 									} else {
 										echo  __( 'N/A', 'wc-frontend-manager' );
